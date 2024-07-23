@@ -3,11 +3,11 @@ import Header from './Header';
 
 function MainLayout({ children }) {
   return (
-    <div>
+    <>
       <Header />
-      {children}
+      <main className="main">{children}</main>
       <Footer />
-    </div>
+    </>
   );
 }
 

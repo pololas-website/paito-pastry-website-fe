@@ -1,5 +1,12 @@
+// import Cakes from "./pages/Cakes";
+
+import SignUp from './pages/SignUp';
+// import Users from "./pages/Users";
+
 function App() {
-  return <h1>Init the front-end migration</h1>;
+  // return <Cakes />;
+  return <SignUp />;
+  // return <Users />;
 }
 
 export default App;

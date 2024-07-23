@@ -1,3 +1,3 @@
 export default function App() {
-  return <h1>Hello world from React!</h1>;
+  return <h1>Init the front-end migration</h1>;
 }

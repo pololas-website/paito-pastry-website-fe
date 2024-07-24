@@ -1,12 +1,7 @@
-// import Cakes from "./pages/Cakes";
-
-import SignUp from './pages/SignUp';
-// import Users from "./pages/Users";
+import Router from './router/Router';
 
 function App() {
-  // return <Cakes />;
-  return <SignUp />;
-  // return <Users />;
+  return <Router />;
 }
 
 export default App;

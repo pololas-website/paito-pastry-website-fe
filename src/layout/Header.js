@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import Logo from '../../public/img/logo.png';
 
 function Header() {
@@ -7,22 +9,22 @@ function Header() {
         <div className="main-nav">
           <div className="main-nav--left">
             {/* This should be a sing in, after sign in,if no account sign up */}
-            <a href="signup.html" className="btn">
+            <Link to="/signup" className="btn">
               Sign up
-            </a>
+            </Link>
             <a href="#" className="btn">
               Stores
             </a>
             <a href="#" className="btn">
               Delivery
             </a>
-            <a href="users.html" className="btn">
+            <Link to="/users" className="btn">
               Users
-            </a>
+            </Link>
           </div>
-          <a href="/" className="header__logo btn">
+          <Link to="/" className="header__logo btn">
             <img src={Logo} alt="logo" />
-          </a>
+          </Link>
           <div className="main-nav--right">
             <span className="input header__search">
               <input placeholder="Search" type="search" autoComplete="off" />

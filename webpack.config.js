@@ -35,6 +35,7 @@ module.exports = {
     },
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   devtool: 'inline-source-map',
 };

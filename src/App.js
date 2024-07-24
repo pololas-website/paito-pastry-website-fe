@@ -1,3 +1,7 @@
-export default function App() {
-  return <h1>Hello world from React!</h1>;
+import Router from './router/Router';
+
+function App() {
+  return <Router />;
 }
+
+export default App;

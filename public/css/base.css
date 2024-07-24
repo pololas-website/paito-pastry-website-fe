@@ -1,0 +1,96 @@
+:root {
+  --font-f-titles: 'Edu AU VIC WA NT Hand', cursive;
+  --font-f-page: 'Roboto', sans-serif;
+  --font-s-page: 1.6rem;
+  --font-s--s: 1.4rem;
+  --font-w--sb: 500;
+  --font-c-page: #472e25;
+
+  --color-white: #fff;
+
+  --color-primary: #48c566;
+  --color-primary-dark-1: #35a851;
+
+  --color-secondary-contrast-dark-1: #b98677;
+  --color-secondary-contrast: #e7a895;
+
+  --color-secondary-dark: #64afdf;
+  --color-secondary: #95d4e7;
+  --color-secondary-light: #bde1ed;
+  --color-secondary-light-1: #e0eff9;
+
+  --color-highlight: #e6427a;
+  --color-highlight-light-1: #e04f85;
+  --color-highlight-light-2: #fe9bb1;
+  --color-highlight-light-3: #ffd2e9;
+  --test: #e04f85;
+
+  --color-gray--1: #f4f4f4;
+  --color-gray-0: #fafafa;
+  --color-gray-1: #ded6d4;
+  --color-gray-2: #aaa;
+  --color-gray-3: #888;
+  --color-gray-4: #777;
+
+  --border-radius-s: 3px;
+  --border-radius-m: 5px;
+  --border-radius-r: 1000rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+input,
+button,
+a {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 1rem = 10px */
+  font-family: var(--font-f-page);
+  color: var(--font-c-page);
+}
+
+body {
+  font-size: var(--font-s-page);
+}
+
+.container {
+  max-width: 120rem;
+  margin: auto;
+}
+
+.heading-1,
+.heading-4 {
+  font-weight: 500;
+}
+
+.heading-1 {
+  font-size: 4rem;
+  line-height: 5rem;
+}
+
+.heading-4 {
+  font-size: 1.6rem;
+  letter-spacing: 1.5px;
+  line-height: 1;
+}
+
+.big-text--1 {
+  font-size: 2.4rem;
+  letter-spacing: -0.4px;
+}
+
+.p {
+  font-size: var(--font-s-page);
+  line-height: 2.56rem;
+}

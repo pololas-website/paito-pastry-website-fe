@@ -19,6 +19,10 @@ module.exports = {
         test: /.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
@@ -31,6 +35,7 @@ module.exports = {
     },
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   devtool: 'inline-source-map',
 };

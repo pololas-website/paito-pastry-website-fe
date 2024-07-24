@@ -1,0 +1,94 @@
+/* ####################### BUTTON ####################### */
+/* ##################################################### */
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  /* padding: .8rem 1.5rem; */
+  text-transform: capitalize;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  border-radius: var(--border-radius-m);
+
+  &.btn--s {
+    font-size: var(--font-s--s);
+    font-weight: var(--font-w--sb);
+  }
+
+  &.btn--primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 1.8rem;
+    text-transform: uppercase;
+    font-weight: var(--font-w--sb);
+    letter-spacing: 1.25px;
+
+    &:hover {
+      background-color: var(--color-primary-dark-1);
+    }
+  }
+
+  &.btn--contrast {
+    background-color: var(--color-secondary-contrast-dark-1);
+    color: var(--color-white);
+    padding: 0.5rem 1.2rem;
+
+    &:hover {
+      background-color: var(--color-secondary-contrast);
+    }
+  }
+}
+
+/* ####################### INPUT ####################### */
+/* ##################################################### */
+
+.input {
+  border-radius: var(--border-radius-m);
+  border: 1px solid var(--color-gray-1);
+  color: var(--color-gray-3);
+  background-color: var(--color-gray-0);
+  padding: 1.8rem;
+  display: flex;
+  gap: 1.5rem;
+
+  &.input--s {
+    line-height: 2rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--border-radius-s);
+  }
+
+  input {
+    color: var(--font-c-page);
+    border: none;
+    outline: none;
+    font-size: inherit;
+    flex: 1;
+    background-color: inherit;
+
+    &::placeholder {
+      color: var(--color-gray-2);
+    }
+
+    &::-webkit-search-cancel-button {
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+/* ####################### CARD ####################### */
+/* ##################################################### */
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  &.card--gap-s {
+    gap: 0.8rem;
+  }
+}

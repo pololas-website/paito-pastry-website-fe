@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import MainLayout from '../layout/MainLayout';
+import Button from '../components/button/Button';
 import { signupApi } from '../api';
 
 function SignUp() {
@@ -49,13 +50,9 @@ function SignUp() {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn--primary"
-            onClick={handleSubmit}
-          >
+          <Button type="submit" primary onClick={handleSubmit}>
             Sign Up
-          </button>
+          </Button>
         </form>
       </section>
     </MainLayout>

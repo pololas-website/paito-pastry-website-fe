@@ -21,7 +21,7 @@
     .main-nav--left {
       gap: 3.2rem;
 
-      .btn {
+      .header__link {
         letter-spacing: 2px;
 
         &:hover {
@@ -75,12 +75,12 @@
 
     .header__link {
       font-weight: 500;
+      padding: 0.8rem;
     }
   }
 
   .header__link {
     letter-spacing: 2px;
-    padding: 0.8rem;
   }
 
   .deliver-nav {

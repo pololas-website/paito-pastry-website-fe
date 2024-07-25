@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import Button from '../components/button/Button';
+
 import Logo from '../../public/img/logo.png';
 
 function Header() {
@@ -9,74 +11,74 @@ function Header() {
         <div className="main-nav">
           <div className="main-nav--left">
             {/* This should be a sing in, after sign in,if no account sign up */}
-            <Link to="/signup" className="btn">
+            <Button as={Link} to="/signup" className="header__link" small>
               Sign up
-            </Link>
-            <a href="#" className="btn">
+            </Button>
+            <Button as={Link} to="/" className="header__link">
               Stores
-            </a>
-            <a href="#" className="btn">
+            </Button>
+            <Button as={Link} to="/" className="header__link">
               Delivery
-            </a>
-            <Link to="/users" className="btn">
+            </Button>
+            <Button as={Link} to="/users" className="header__link">
               Users
-            </Link>
+            </Button>
           </div>
-          <Link to="/" className="header__logo btn">
+          <Button as={Link} to="/" className="header__logo">
             <img src={Logo} alt="logo" />
-          </Link>
+          </Button>
           <div className="main-nav--right">
             <span className="input header__search">
               <input placeholder="Search" type="search" autoComplete="off" />
-              <button className="btn">
+              <Button>
                 <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
+              </Button>
             </span>
-            <button className="btn header__buy">
+            <Button className="header__buy">
               <i className="fa-solid fa-cart-shopping"></i>
-            </button>
+            </Button>
           </div>
         </div>
         <ul className="secondary-nav">
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               What&apos;s New
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Cakes
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Cupcakes
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Wedding
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Free From
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Brownies
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Nationwide
-            </a>
+            </Button>
           </li>
           <li>
-            <a href="#" className="header__link btn">
+            <Button as={Link} to="/" className="header__link">
               Party Supplies
-            </a>
+            </Button>
           </li>
         </ul>
         <div className="deliver-nav">
@@ -90,9 +92,7 @@ function Header() {
               placeholder="Enter postcode"
             />
           </span>
-          <button className="btn btn--s btn--contrast deliver__btn">
-            Find
-          </button>
+          <Button className="btn--s btn--contrast deliver__btn">Find</Button>
         </div>
       </nav>
     </header>

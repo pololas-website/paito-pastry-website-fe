@@ -92,7 +92,9 @@ function Header() {
               placeholder="Enter postcode"
             />
           </span>
-          <Button className="btn--s btn--contrast deliver__btn">Find</Button>
+          <Button className="deliver__btn" small contrast>
+            Find
+          </Button>
         </div>
       </nav>
     </header>

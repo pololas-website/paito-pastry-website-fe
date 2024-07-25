@@ -1,6 +1,6 @@
-import { flatClasses } from './baseElement.utils';
+import { composeAllClasses, getBasicElementClasses } from './baseElement.utils';
 
-function withBaseInlineElement(Component) {
+function withBaseInlineElement(Component, moduleStyles) {
   return function BaseInlineElement({
     small,
     primary,
@@ -8,7 +8,16 @@ function withBaseInlineElement(Component) {
     className,
     ...rest
   }) {
-    const classNames = flatClasses(small, primary, contrast, className);
+    const basicElementClasses = getBasicElementClasses(
+      small,
+      primary,
+      contrast,
+    );
+    const classNames = composeAllClasses(
+      moduleStyles,
+      basicElementClasses,
+      className,
+    );
 
     return <Component className={classNames} {...rest} />;
   };

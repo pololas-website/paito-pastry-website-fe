@@ -1,14 +1,14 @@
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
-import './button.css';
+import * as styles from './button.module.css';
 
 function Button({ as, children, className = '', ...restProps }) {
   const Container = as ? as : 'button';
 
   return (
-    <Container {...restProps} className={`btn ${className}`}>
+    <Container className={`${styles.btn} ${className}`} {...restProps}>
       {children}
     </Container>
   );
 }
 
-export default withBaseInlineElement(Button);
+export default withBaseInlineElement(Button, styles);

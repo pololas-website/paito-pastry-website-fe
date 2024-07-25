@@ -50,7 +50,7 @@ function SignUp() {
               required
             />
           </div>
-          <Button type="submit" className="btn--primary" onClick={handleSubmit}>
+          <Button type="submit" primary onClick={handleSubmit}>
             Sign Up
           </Button>
         </form>

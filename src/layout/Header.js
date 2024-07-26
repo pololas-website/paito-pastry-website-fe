@@ -90,10 +90,10 @@ function Header() {
             What Can Be Delivered To Me?
           </label>
           <Input
-            className="input--s"
             id="deliver-input"
             type="text"
             placeholder="Enter postcode"
+            small
           />
           <Button className="deliver__btn" small contrast>
             Find

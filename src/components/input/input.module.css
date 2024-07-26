@@ -38,12 +38,12 @@
   }
 }
 
-.input--s {
+.small {
   font-size: 1.4rem;
 }
 
-.input--s,
-.input--s input {
+.small,
+.small input {
   border-radius: var(--border-radius-s);
   padding: 0.5rem 0.8rem;
 }

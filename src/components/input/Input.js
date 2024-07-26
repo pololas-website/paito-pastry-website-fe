@@ -1,7 +1,8 @@
-import './input.css';
+import * as styles from './input.module.css';
+import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 
 function Input({ className, children, ...rest }) {
-  const currentClassName = `input ${className}`;
+  const currentClassName = `${styles.input} ${className}`;
 
   if (children)
     return (
@@ -14,4 +15,4 @@ function Input({ className, children, ...rest }) {
   return <input className={currentClassName} {...rest} />;
 }
 
-export default Input;
+export default withBaseInlineElement(Input, styles);

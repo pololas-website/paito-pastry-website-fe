@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Button from '../components/button/Button';
+import { Button, Input } from '../components';
 
 import Logo from '../../public/img/logo.png';
 
@@ -28,12 +28,16 @@ function Header() {
             <img src={Logo} alt="logo" />
           </Button>
           <div className="main-nav--right">
-            <span className="input header__search">
-              <input placeholder="Search" type="search" autoComplete="off" />
+            <Input
+              className="header__search"
+              placeholder="Search"
+              type="search"
+              autoComplete="off"
+            >
               <Button>
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Button>
-            </span>
+            </Input>
             <Button className="header__buy">
               <i className="fa-solid fa-cart-shopping"></i>
             </Button>
@@ -85,13 +89,12 @@ function Header() {
           <label htmlFor="deliver-input" className="deliver-nav__label">
             What Can Be Delivered To Me?
           </label>
-          <span className="input input--s">
-            <input
-              id="deliver-input"
-              type="text"
-              placeholder="Enter postcode"
-            />
-          </span>
+          <Input
+            id="deliver-input"
+            type="text"
+            placeholder="Enter postcode"
+            small
+          />
           <Button className="deliver__btn" small contrast>
             Find
           </Button>

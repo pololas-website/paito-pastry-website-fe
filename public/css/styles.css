@@ -1,5 +1,4 @@
 @import 'base.css';
-@import 'components.css';
 
 .header {
   color: var(--color-white);

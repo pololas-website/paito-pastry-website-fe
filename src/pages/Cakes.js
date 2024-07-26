@@ -4,6 +4,8 @@ import MediumCake from '../../public/img/medium-cake.jpg';
 import LargeCake from '../../public/img/large-cake.jpg';
 import ExtraLargeCake from '../../public/img/extra-large-cake.jpg';
 
+import { Card } from '../components';
+
 function Cakes() {
   return (
     <MainLayout>
@@ -16,7 +18,7 @@ function Cakes() {
           fresh and baked to order.
         </p>
         <div className="size-presentation__cards">
-          <div className="card">
+          <Card>
             <img
               src={SmallCake}
               alt="small cake"
@@ -24,8 +26,8 @@ function Cakes() {
             />
             <span className="size-presentation__card-title">Smalll</span>
             <span className="size-presentation__portions">(Serves 8)</span>
-          </div>
-          <div className="card">
+          </Card>
+          <Card>
             <img
               src={MediumCake}
               alt="Medium cake"
@@ -33,8 +35,8 @@ function Cakes() {
             />
             <span className="size-presentation__card-title">Medium</span>
             <span className="size-presentation__portions">(Serves 14)</span>
-          </div>
-          <div className="card">
+          </Card>
+          <Card>
             <img
               src={LargeCake}
               alt="Large cake"
@@ -42,8 +44,8 @@ function Cakes() {
             />
             <span className="size-presentation__card-title">Large</span>
             <span className="size-presentation__portions">(Serves 24)</span>
-          </div>
-          <div className="card">
+          </Card>
+          <Card>
             <img
               src={ExtraLargeCake}
               alt="Extra large cake"
@@ -51,7 +53,7 @@ function Cakes() {
             />
             <span className="size-presentation__card-title">Extra Large</span>
             <span className="size-presentation__portions">(Serves 40)</span>
-          </div>
+          </Card>
         </div>
       </section>
     </MainLayout>

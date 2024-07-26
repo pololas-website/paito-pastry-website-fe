@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import MainLayout from '../layout/MainLayout';
-import { Button, Input } from '../components';
-import { signupApi } from '../api';
+import './signup.css';
+
+import MainLayout from '../../layout/mainLayout/MainLayout';
+import { Button, Input } from '../../components';
+import { signupApi } from '../../api';
 
 function SignUp() {
   const [fullName, setFullName] = useState('');
@@ -31,7 +33,6 @@ function SignUp() {
         <form className="signup__form">
           <h4 className="heading-4 signup__title">Create an Account</h4>
           <Input
-            className="input"
             type="text"
             name="name"
             placeholder="Full Name"
@@ -40,7 +41,6 @@ function SignUp() {
             required
           />
           <Input
-            className="input"
             type="email"
             name="email"
             placeholder="Email Address"

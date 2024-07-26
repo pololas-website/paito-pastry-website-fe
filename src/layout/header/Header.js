@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
 
-import { Button, Input } from '../components';
+import { Button, Input } from '../../components';
 
-import Logo from '../../public/img/logo.png';
+import Logo from '../../../public/img/logo.png';
+import './header.css';
 
 function Header() {
   return (
-    <header className="header">
+    <header className="main-header">
       <nav>
-        <div className="main-nav">
-          <div className="main-nav--left">
+        <div className="header__main-nav">
+          <div className="header__main-nav--left">
             {/* This should be a sing in, after sign in,if no account sign up */}
             <Button as={Link} to="/signup" className="header__link" small>
               Sign up
@@ -27,7 +28,7 @@ function Header() {
           <Button as={Link} to="/" className="header__logo">
             <img src={Logo} alt="logo" />
           </Button>
-          <div className="main-nav--right">
+          <div className="header__main-nav--right">
             <Input
               className="header__search"
               placeholder="Search"
@@ -43,7 +44,7 @@ function Header() {
             </Button>
           </div>
         </div>
-        <ul className="secondary-nav">
+        <ul className="header__secondary-nav">
           <li>
             <Button as={Link} to="/" className="header__link">
               What&apos;s New
@@ -85,8 +86,8 @@ function Header() {
             </Button>
           </li>
         </ul>
-        <div className="deliver-nav">
-          <label htmlFor="deliver-input" className="deliver-nav__label">
+        <div className="header__deliver-nav">
+          <label htmlFor="deliver-input" className="header__label">
             What Can Be Delivered To Me?
           </label>
           <Input
@@ -95,7 +96,7 @@ function Header() {
             placeholder="Enter postcode"
             small
           />
-          <Button className="deliver__btn" small contrast>
+          <Button className="header__btn" small contrast>
             Find
           </Button>
         </div>

@@ -1,0 +1,44 @@
+.users {
+  padding: 32px 0;
+
+  .users__title {
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .users__list {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 70%;
+    list-style: none;
+  }
+
+  .users__user {
+    margin-top: 3.5rem;
+    padding-bottom: 3.2rem;
+    border-bottom: 0.5rem solid var(--color-gray--1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .users__full-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      font-size: 0.5em;
+      height: 2em;
+      aspect-ratio: 1 / 1;
+      background-color: var(--font-c-page);
+      border-radius: 50%;
+      color: var(--color-white);
+      display: inline-grid;
+      place-content: center;
+    }
+  }
+}

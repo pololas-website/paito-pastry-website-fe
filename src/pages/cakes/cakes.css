@@ -1,0 +1,30 @@
+.size-presentation {
+  max-width: 87rem;
+  margin: auto;
+  text-align: center;
+
+  .size-presentation__title {
+    margin-bottom: 3.2rem;
+  }
+
+  .size-presentation__description {
+    margin-bottom: 2.4rem;
+  }
+
+  .size-presentation__cards {
+    width: 62.4rem;
+    display: inline-grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+
+  .size-presentation__img {
+    width: 100%;
+    margin-bottom: 0.8rem;
+  }
+
+  .size-presentation__card-title {
+    font-weight: var(--font-w--sb);
+    margin-bottom: 0.4rem;
+  }
+}

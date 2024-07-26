@@ -1,10 +1,11 @@
-import MainLayout from '../layout/MainLayout';
-import SmallCake from '../../public/img/small-cake.jpg';
-import MediumCake from '../../public/img/medium-cake.jpg';
-import LargeCake from '../../public/img/large-cake.jpg';
-import ExtraLargeCake from '../../public/img/extra-large-cake.jpg';
+import MainLayout from '../../layout/mainLayout/MainLayout';
+import SmallCake from '../../../public/img/small-cake.jpg';
+import MediumCake from '../../../public/img/medium-cake.jpg';
+import LargeCake from '../../../public/img/large-cake.jpg';
+import ExtraLargeCake from '../../../public/img/extra-large-cake.jpg';
+import './cakes.css';
 
-import { Card } from '../components';
+import { Card } from '../../components';
 
 function Cakes() {
   return (

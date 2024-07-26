@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import MainLayout from '../layout/MainLayout';
-import { usersApi } from '../api';
+import './users.css';
+
+import MainLayout from '../../layout/mainLayout/MainLayout';
+import { usersApi } from '../../api';
 
 function Users() {
   const [users, setUsers] = useState([]);

@@ -1,0 +1,15 @@
+.signup {
+  padding: 32px 0;
+
+  .signup__form {
+    max-width: 32.4rem;
+    margin: auto;
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .signup__title {
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,8 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-small {
+  gap: 0.8rem;
+}

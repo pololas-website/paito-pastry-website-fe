@@ -1,3 +1,5 @@
+import './input.css';
+
 function Input({ className, children, ...rest }) {
   const currentClassName = `input ${className}`;
 

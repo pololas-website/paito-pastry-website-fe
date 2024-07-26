@@ -1,0 +1,49 @@
+.input {
+  border-radius: var(--border-radius-m);
+  border: 1px solid var(--color-gray-1);
+}
+
+.input,
+.input input {
+  padding: 1.8rem;
+  color: var(--font-c-page);
+  background-color: var(--color-gray-0);
+  outline: none;
+  overflow: hidden;
+
+  &::placeholder {
+    color: var(--color-gray-2);
+  }
+
+  &::-webkit-search-cancel-button {
+    margin-left: 0.5rem;
+  }
+}
+
+.input:has(input) {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  input {
+    padding-right: 0;
+    border: none;
+    font-size: inherit;
+    flex: 1;
+  }
+
+  button {
+    margin-right: 1.8rem;
+  }
+}
+
+.input--s {
+  font-size: 1.4rem;
+}
+
+.input--s,
+.input--s input {
+  border-radius: var(--border-radius-s);
+  padding: 0.5rem 0.8rem;
+}

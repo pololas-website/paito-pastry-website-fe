@@ -30,26 +30,24 @@ function SignUp() {
       <section className="signup container">
         <form className="signup__form">
           <h4 className="heading-4 signup__title">Create an Account</h4>
-          <div className="input">
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={fullName}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="input">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+          <input
+            className="input"
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={fullName}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            className="input"
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={handleInputChange}
+            required
+          />
           <Button type="submit" primary onClick={handleSubmit}>
             Sign Up
           </Button>

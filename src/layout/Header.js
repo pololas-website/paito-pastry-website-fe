@@ -85,13 +85,12 @@ function Header() {
           <label htmlFor="deliver-input" className="deliver-nav__label">
             What Can Be Delivered To Me?
           </label>
-          <span className="input input--s">
-            <input
-              id="deliver-input"
-              type="text"
-              placeholder="Enter postcode"
-            />
-          </span>
+          <input
+            className="input input--s"
+            id="deliver-input"
+            type="text"
+            placeholder="Enter postcode"
+          />
           <Button className="deliver__btn" small contrast>
             Find
           </Button>

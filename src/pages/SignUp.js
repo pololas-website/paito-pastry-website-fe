@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import MainLayout from '../layout/MainLayout';
-import Button from '../components/button/Button';
+import { Button, Input } from '../components';
 import { signupApi } from '../api';
 
 function SignUp() {
@@ -30,7 +30,7 @@ function SignUp() {
       <section className="signup container">
         <form className="signup__form">
           <h4 className="heading-4 signup__title">Create an Account</h4>
-          <input
+          <Input
             className="input"
             type="text"
             name="name"
@@ -39,7 +39,7 @@ function SignUp() {
             onChange={handleInputChange}
             required
           />
-          <input
+          <Input
             className="input"
             type="email"
             name="email"

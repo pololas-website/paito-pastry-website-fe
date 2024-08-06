@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import './signup.css';
 
-import MainLayout from '../../layout/mainLayout/MainLayout';
 import { Button, Input } from '../../components';
 import { signupApi } from '../../api';
 
@@ -28,32 +27,30 @@ function SignUp() {
   }
 
   return (
-    <MainLayout>
-      <section className="signup container">
-        <form className="signup__form">
-          <h4 className="heading-4 signup__title">Create an Account</h4>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={handleInputChange}
-            required
-          />
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={handleInputChange}
-            required
-          />
-          <Button type="submit" primary onClick={handleSubmit}>
-            Sign Up
-          </Button>
-        </form>
-      </section>
-    </MainLayout>
+    <section className="signup container">
+      <form className="signup__form">
+        <h4 className="heading-4 signup__title">Create an Account</h4>
+        <Input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          value={fullName}
+          onChange={handleInputChange}
+          required
+        />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={handleInputChange}
+          required
+        />
+        <Button type="submit" primary onClick={handleSubmit}>
+          Sign Up
+        </Button>
+      </form>
+    </section>
   );
 }
 

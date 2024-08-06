@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Cakes, SignUp, Users } from '../pages';
 import MainLayout from '../layout/mainLayout/MainLayout';
+import { Cakes, SignUp, Users } from '../pages';
+
+import { action as signUpAction } from '../pages/signUp/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,7 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignUp />,
+        action: signUpAction,
       },
       {
         path: 'users',

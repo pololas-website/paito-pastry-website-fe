@@ -1,60 +1,28 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 
 import './signup.css';
 
-import MainLayout from '../../layout/mainLayout/MainLayout';
 import { Button, Input } from '../../components';
 import { signupApi } from '../../api';
 
-function SignUp() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const navigate = useNavigate();
-
-  function handleInputChange(e) {
-    if (e.target.name === 'name') {
-      setFullName(e.target.value);
-      return;
-    }
-
-    setEmail(e.target.value);
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    await signupApi.signup(fullName, email);
-    navigate('/users');
-  }
-
+export default function SignUp() {
   return (
-    <MainLayout>
-      <section className="signup container">
-        <form className="signup__form">
-          <h4 className="heading-4 signup__title">Create an Account</h4>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={handleInputChange}
-            required
-          />
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={handleInputChange}
-            required
-          />
-          <Button type="submit" primary onClick={handleSubmit}>
-            Sign Up
-          </Button>
-        </form>
-      </section>
-    </MainLayout>
+    <section className="signup container">
+      <Form method="post" className="signup__form">
+        <h4 className="heading-4 signup__title">Create an Account</h4>
+        <Input type="text" name="fullName" placeholder="Full Name" required />
+        <Input type="email" name="email" placeholder="Email Address" required />
+        <Button type="submit" primary>
+          Sign Up
+        </Button>
+      </Form>
+    </section>
   );
 }
 
-export default SignUp;
+export async function action({ request }) {
+  const formData = await request.formData();
+  const { fullName, email } = Object.fromEntries(formData);
+  await signupApi.signup(fullName, email);
+  return redirect('/users');
+}

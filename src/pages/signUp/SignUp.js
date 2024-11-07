@@ -10,8 +10,23 @@ export default function SignUp() {
     <section className="signup container">
       <Form method="post" className="signup__form">
         <h4 className="heading-4 signup__title">Create an Account</h4>
-        <Input type="text" name="fullName" placeholder="Full Name" required />
+        <div className="signup__two-column">
+          <Input
+            type="text"
+            name="fullName"
+            placeholder="First Name"
+            required
+          />
+          <Input type="text" name="lastName" placeholder="Last Name" required />
+        </div>
         <Input type="email" name="email" placeholder="Email Address" required />
+        <Input type="password" name="email" placeholder="Password" required />
+        <Input
+          type="password"
+          name="email"
+          placeholder="Confirm Passwrod"
+          required
+        />
         <Button type="submit" primary>
           Sign Up
         </Button>

@@ -4,7 +4,7 @@
   "description": "The resultant page will be [this](https://www.lolascupcakes.co.uk/SubMenu1/6/Cakes.htm)",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest -- baseElement.utils.test.js",
     "style": "prettier . --write --ignore-unknown",
     "lint": "eslint",
     "start": "webpack serve --mode development",

@@ -10,6 +10,7 @@
   background-color: var(--color-gray-0);
   outline: none;
   overflow: hidden;
+  min-width: 1rem;
 
   &::placeholder {
     color: var(--color-gray-2);

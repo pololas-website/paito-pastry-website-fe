@@ -1,8 +1,14 @@
+/* **** SPACING **** */
+/* 
+  8 / 10 / 16
+ */
+
 :root {
   --font-f-titles: 'Edu AU VIC WA NT Hand', cursive;
   --font-f-page: 'Roboto', sans-serif;
   --font-s-page: 1.6rem;
   --font-s--s: 1.4rem;
+  --font-s--xs: 1.2rem;
   --font-w--sb: 500;
   --font-c-page: #472e25;
 
@@ -35,6 +41,9 @@
   --border-radius-s: 3px;
   --border-radius-m: 5px;
   --border-radius-r: 1000rem;
+
+  --zindex-bg-menu: 50;
+  --zindex-menu: 51;
 }
 
 *,

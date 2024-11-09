@@ -39,3 +39,7 @@
     background-color: var(--color-secondary-contrast);
   }
 }
+
+.rounded {
+  border-radius: 50%;
+}

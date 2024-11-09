@@ -39,7 +39,7 @@ function Header() {
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Button>
             </Input>
-            <Button className="header__buy">
+            <Button className="header__buy" rounded>
               <i className="fa-solid fa-cart-shopping"></i>
             </Button>
           </div>

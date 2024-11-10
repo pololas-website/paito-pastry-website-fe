@@ -16,14 +16,14 @@ export function useDisableScroll(disable) {
 export function useFadeAnimation(elementRef) {
   const [visible, setVisible] = useState(false);
   const timeTransition = 400;
-  const transition = `opacity ${timeTransition}ms ease-in-out`;
+  const transition = `opacity 400ms ease-in-out`;
 
   useEffect(() => {
     if (visible) {
       elementRef.current.style.transition = transition;
       setTimeout(() => (elementRef.current.style.opacity = '1'), 0);
     }
-  }, [visible]);
+  }, [visible, elementRef, transition]);
 
   const setFadeIn = (fade) => {
     if (fade) {

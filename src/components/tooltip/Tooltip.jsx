@@ -1,29 +1,33 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import * as styles from './tooltip.module.css';
-import { useDisableScroll } from '../core/hooks/domHooks';
+import { useFadeAnimation, useDisableScroll } from '../core/hooks/domHooks';
 
 function Tooltip({ children, description }) {
-  const [isToolTipVisible, setIsToolTipVisible] = useState(false);
-  useDisableScroll(isToolTipVisible);
+  const tooltipContainderRef = useRef(null);
+  const [fadeIn, setFadeIn] = useFadeAnimation(tooltipContainderRef);
 
-  function handleToolTipVisible(e, visible) {
+  useDisableScroll(fadeIn);
+
+  function handleHideToolTip(e) {
     e.stopPropagation();
-    setIsToolTipVisible(visible);
+    setFadeIn(false);
   }
 
   return (
-    <div
-      className={styles.container}
-      onClick={(e) => handleToolTipVisible(e, true)}
-    >
+    <div className={styles.container} onClick={() => setFadeIn(true)}>
       {children}
-      {isToolTipVisible && (
+      {fadeIn && (
         <>
           <div
             className={styles['background-layer']}
-            onClick={(e) => handleToolTipVisible(e, false)}
+            onClick={(e) => handleHideToolTip(e)}
           ></div>
-          <div className={styles.description}>{description}</div>
+          <div
+            className={styles['tooltip-container']}
+            ref={tooltipContainderRef}
+          >
+            {description}
+          </div>
         </>
       )}
     </div>

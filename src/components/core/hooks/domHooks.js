@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as domUtils from '../../../utils/domUtils';
+import { domUtils } from '../../../utils';
 
 const body = document.body;
 const html = document.documentElement;

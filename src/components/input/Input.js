@@ -1,6 +1,6 @@
 import * as styles from './input.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
-import * as stringUtils from './../../utils/strings';
+import { stringUtils } from './../../utils';
 
 function Input({ className, children, ...rest }) {
   const classNames = stringUtils.join([styles.input, className]);

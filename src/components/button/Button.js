@@ -1,6 +1,6 @@
 import * as styles from './button.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
-import * as stringUtils from './../../utils/strings';
+import { stringUtils } from './../../utils';
 
 function Button({ as, children, className = '', rounded, ...restProps }) {
   const Container = as ? as : 'button';

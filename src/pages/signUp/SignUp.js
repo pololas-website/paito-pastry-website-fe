@@ -2,8 +2,9 @@ import { Form, redirect } from 'react-router-dom';
 
 import './signup.css';
 
-import { Button, Input, InputGroup, Select } from '../../components';
+import { Button, Input, InputGroup } from '../../components';
 import { signupApi } from '../../api';
+import Date from '../../components/input/date/Date';
 
 export default function SignUp() {
   return (
@@ -19,11 +20,7 @@ export default function SignUp() {
           />
           <Input type="text" name="lastName" placeholder="Last Name" required />
         </InputGroup>
-        <InputGroup label="Birthday" descriptionHelp="help text">
-          <Select options={[]} name="month" required />
-          <Select options={[]} name="day" required />
-          <Select options={[]} name="year" required />
-        </InputGroup>
+        <Date label="Birthday" descriptionHelp="help text" />
         <Input type="email" name="email" placeholder="Email Address" required />
         <Input
           type="password"

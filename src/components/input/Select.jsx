@@ -1,14 +1,18 @@
 import * as styles from './input.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
-import * as stringUtils from './../../utils/strings';
+import { stringUtils } from './../../utils';
 
-function Select({ className, options, ...rest }) {
+function Select({ className, options, onChange, ...rest }) {
   const classNames = stringUtils.join([styles.input, className]);
 
   return (
-    <select className={classNames} {...rest}>
+    <select
+      className={classNames}
+      onChange={(e) => onChange({ name: e.target.name, value: e.target.value })}
+      {...rest}
+    >
       {options.map((option) => (
-        <option key={option.id} {...option} />
+        <option key={option} label={option} value={option} />
       ))}
     </select>
   );

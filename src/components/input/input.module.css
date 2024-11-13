@@ -10,6 +10,8 @@
   background-color: var(--color-gray-0);
   outline: none;
   overflow: hidden;
+  min-width: 1rem;
+  font-size: inherit;
 
   &::placeholder {
     color: var(--color-gray-2);
@@ -29,7 +31,6 @@
   input {
     padding-right: 0;
     border: none;
-    font-size: inherit;
     flex: 1;
   }
 

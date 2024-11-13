@@ -1,11 +1,17 @@
 import * as styles from './button.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
+import { stringUtils } from './../../utils';
 
-function Button({ as, children, className = '', ...restProps }) {
+function Button({ as, children, className = '', rounded, ...restProps }) {
   const Container = as ? as : 'button';
+  const classNames = stringUtils.join([
+    styles.btn,
+    rounded && styles['rounded'],
+    className,
+  ]);
 
   return (
-    <Container className={`${styles.btn} ${className}`} {...restProps}>
+    <Container className={classNames} {...restProps}>
       {children}
     </Container>
   );

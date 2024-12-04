@@ -1,10 +1,10 @@
 import { Form, redirect } from 'react-router-dom';
 
-import './signup.css';
+import { Button, Input, InputGroup, Date } from '../../components';
 
-import { Button, Input, InputGroup } from '../../components';
-import { signupApi } from '../../api';
-import Date from '../../components/input/date/Date';
+import { signUpWithEmailAndPassword } from '../../firebase';
+
+import './signup.css';
 
 export default function SignUp() {
   return (
@@ -12,13 +12,8 @@ export default function SignUp() {
       <Form method="post" className="signup__form">
         <h4 className="heading-4 signup__title">Create an Account</h4>
         <InputGroup>
-          <Input
-            type="text"
-            name="fullName"
-            placeholder="First Name"
-            required
-          />
-          <Input type="text" name="lastName" placeholder="Last Name" required />
+          <Input type="text" name="fullName" placeholder="First Name" />
+          <Input type="text" name="lastName" placeholder="Last Name" />
         </InputGroup>
         <Date label="Birthday" descriptionHelp="help text" />
         <Input type="email" name="email" placeholder="Email Address" required />
@@ -32,7 +27,6 @@ export default function SignUp() {
           type="password"
           name="confirmPassword"
           placeholder="Confirm Passwrod"
-          required
         />
         <Button type="submit" primary>
           Sign Up
@@ -44,7 +38,10 @@ export default function SignUp() {
 
 export async function action({ request }) {
   const formData = await request.formData();
-  const { fullName, email } = Object.fromEntries(formData);
-  await signupApi.signup(fullName, email);
+  const { email, password } = Object.fromEntries(formData);
+  const user = await signUpWithEmailAndPassword(email, password);
+
+  console.log(user);
+
   return redirect('/users');
 }

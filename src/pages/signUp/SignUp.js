@@ -1,6 +1,11 @@
 import { Form, redirect } from 'react-router-dom';
 
-import { Button, Input, InputGroup, Date } from '../../components';
+import {
+  Button,
+  Input,
+  InputGroup,
+  Date as DateComponent,
+} from '../../components';
 
 import { signUpWithEmailAndPassword } from '../../firebase';
 
@@ -12,10 +17,10 @@ export default function SignUp() {
       <Form method="post" className="signup__form">
         <h4 className="heading-4 signup__title">Create an Account</h4>
         <InputGroup>
-          <Input type="text" name="fullName" placeholder="First Name" />
+          <Input type="text" name="name" placeholder="First Name" />
           <Input type="text" name="lastName" placeholder="Last Name" />
         </InputGroup>
-        <Date label="Birthday" descriptionHelp="help text" />
+        <DateComponent label="Birthday" descriptionHelp="help text" />
         <Input type="email" name="email" placeholder="Email Address" required />
         <Input
           type="password"
@@ -38,10 +43,11 @@ export default function SignUp() {
 
 export async function action({ request }) {
   const formData = await request.formData();
-  const { email, password } = Object.fromEntries(formData);
-  const user = await signUpWithEmailAndPassword(email, password);
+  const fields = Object.fromEntries(formData);
+  const { day, month, year } = fields;
+  const birthday = new Date(`${year} ${month} ${day}`).toLocaleDateString();
 
-  console.log(user);
+  await signUpWithEmailAndPassword({ ...fields, birthday });
 
   return redirect('/users');
 }

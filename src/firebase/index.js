@@ -1,8 +1,22 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDocs,
+  collection,
+} from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
+// TODO: Refactor it to be a FirebaseService that implement UserApi, AuthApi Interface
+//       in order to use only the UserApi, AuthApi Interface and not use an specific dependencies
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,11 +33,48 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-export async function signUpWithEmailAndPassword(email, password) {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password,
-  );
-  return userCredential.user;
+const db = getFirestore(app);
+
+export function onSignInStateChanged(callback) {
+  return onAuthStateChanged(auth, callback);
+}
+
+// TODO: add Verify Email workflow when signing up.
+export async function signUpWithEmailAndPassword(fields) {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      fields.email,
+      fields.password,
+    );
+
+    await addUser(fields, userCredential.user.uid);
+  } catch (e) {
+    console.log('Error when signUp with email and password', e);
+  }
+}
+
+export async function addUser({ name, lastName, birthday, email }, uid) {
+  try {
+    await setDoc(doc(db, 'user', uid), {
+      name,
+      lastName,
+      birthday,
+      email,
+    });
+  } catch (e) {
+    console.log('Error adding the new user: ', e);
+  }
+}
+
+export async function getUsers() {
+  try {
+    const docsSnapshot = await getDocs(collection(db, 'user'));
+    const users = [];
+
+    docsSnapshot.forEach((doc) => users.push({ ...doc.data(), id: doc.id }));
+    return users;
+  } catch (e) {
+    console.log('Error getting Users', e);
+  }
 }

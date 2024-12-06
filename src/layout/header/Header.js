@@ -4,6 +4,7 @@ import { Button, Input } from '../../components';
 
 import Logo from '../../../public/img/logo.png';
 import './header.css';
+import UserIcon from './UserIcon';
 
 function Header() {
   return (
@@ -40,8 +41,9 @@ function Header() {
               </Button>
             </Input>
             <Button className="header__buy" rounded>
-              <i className="fa-solid fa-cart-shopping"></i>
+              <i className="fa-solid fa-basket-shopping"></i>
             </Button>
+            <UserIcon />
           </div>
         </div>
         <ul className="header__secondary-nav">

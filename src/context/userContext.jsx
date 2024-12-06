@@ -1,12 +1,13 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { onSignInStateChanged } from '../firebase';
 
-const userContext = createContext(null);
+const intialUserValue = { user: null };
+const userContext = createContext(intialUserValue);
 export const useUserContext = () => useContext(userContext);
 
 // TODO: Analize if this should be in a redux global state and migrate if needed.
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(intialUserValue);
 
   useEffect(() => {
     onSignInStateChanged((user) => {
@@ -15,15 +16,17 @@ export default function UserProvider({ children }) {
         const { accessToken, displayName, email, photoURL, phoneNumber, uid } =
           user;
         setUser({
-          accessToken,
-          displayName,
-          email,
-          photoURL,
-          phoneNumber,
-          uid,
+          user: {
+            accessToken,
+            displayName,
+            email,
+            photoURL,
+            phoneNumber,
+            uid,
+          },
         });
       } else {
-        setUser(null);
+        setUser(intialUserValue);
       }
     });
   }, []);

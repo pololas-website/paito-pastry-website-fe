@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -51,6 +52,14 @@ export async function signUpWithEmailAndPassword(fields) {
     await addUser(fields, userCredential.user.uid);
   } catch (e) {
     console.log('Error when signUp with email and password', e);
+  }
+}
+
+export async function logOut() {
+  try {
+    await signOut(auth);
+  } catch (e) {
+    console.log('Error when loggin out:', e);
   }
 }
 

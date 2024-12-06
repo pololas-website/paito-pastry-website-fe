@@ -12,9 +12,8 @@ function Header() {
       <nav>
         <div className="header__main-nav">
           <div className="header__main-nav--left">
-            {/* This should be a sing in, after sign in,if no account sign up */}
-            <Button as={Link} to="/signup" className="header__link" small>
-              Sign up
+            <Button as={Link} to="/signin" className="header__link" small>
+              Sign In
             </Button>
             <Button as={Link} to="/" className="header__link">
               Stores

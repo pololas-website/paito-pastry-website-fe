@@ -1,11 +1,15 @@
-label {
-  font-size: var(--font-s--s);
-  font-weight: var(--font-w--sb);
-  margin-right: 0.5rem;
-}
+.label-container {
+  margin-bottom: 0.5rem;
 
-.help-icon {
-  display: inline-flex;
+  label {
+    font-size: var(--font-s--s);
+    font-weight: var(--font-w--sb);
+    margin-right: 0.5rem;
+  }
+
+  .help-icon {
+    display: inline-flex;
+  }
 }
 
 .grid {
@@ -13,5 +17,4 @@ label {
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   gap: 1.2rem;
-  margin-top: 0.5rem;
 }

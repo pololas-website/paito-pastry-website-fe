@@ -9,13 +9,13 @@ import {
 
 import { signUpWithEmailAndPassword } from '../../firebase';
 
-import './signup.css';
+import * as styles from './authentication.module.css';
 
 export default function SignUp() {
   return (
-    <section className="signup container">
-      <Form method="post" className="signup__form">
-        <h4 className="heading-4 signup__title">Create an Account</h4>
+    <section className={`container ${styles['auth-container']}`}>
+      <Form method="post" className={styles.form}>
+        <h4 className={`heading-4 ${styles.title}`}>Create an Account</h4>
         <InputGroup>
           <Input type="text" name="name" placeholder="First Name" />
           <Input type="text" name="lastName" placeholder="Last Name" />

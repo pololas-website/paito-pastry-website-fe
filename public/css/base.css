@@ -13,6 +13,7 @@
   --font-s--s: 1.4rem;
   --font-s--xs: 1.2rem;
   --font-w--sb: 500;
+  --font-w--b: 700;
   --font-c-page: #472e25;
 
   --color-white: #fff;
@@ -50,7 +51,9 @@
 
   /* SPACING VARIABLES */
   --spacing-64: 6.4rem;
+  --spacing-36: 3.6rem;
   --spacing-32: 3.2rem;
+  --spacing-24: 2.4rem;
   --spacing-20: 2rem;
   --spacing-12: 1.2rem;
 }

@@ -1,4 +1,4 @@
-import { Form, redirect } from 'react-router-dom';
+import { Form, Link, redirect } from 'react-router-dom';
 import { Button, Input } from '../../components';
 import { logInWithEmailAndPassword } from '../../firebase';
 
@@ -16,9 +16,21 @@ export default function SignIn() {
           placeholder="Password"
           required
         />
-        <Button type="submit" primary>
+        <Button type="submit" className={styles['signin-button']}>
           Sign In
         </Button>
+        <Link className={styles['forgot-password']}>Forgot password?</Link>
+        <div className={styles['create-account-container']}>
+          <hr />
+          <Button
+            as={Link}
+            to="/signup"
+            className={styles['create-account-button']}
+            primary
+          >
+            Create new account
+          </Button>
+        </div>
       </Form>
     </section>
   );

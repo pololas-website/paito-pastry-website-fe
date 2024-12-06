@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
   signOut,
 } from 'firebase/auth';
 import {
@@ -43,12 +44,14 @@ export function onSignInStateChanged(callback) {
 // TODO: add Verify Email workflow when signing up.
 export async function signUpWithEmailAndPassword(fields) {
   try {
+    const { name, lastName, email, password } = fields;
     const userCredential = await createUserWithEmailAndPassword(
       auth,
-      fields.email,
-      fields.password,
+      email,
+      password,
     );
 
+    await updateAccountProfile({ displayName: `${name} ${lastName}` });
     await addUser(fields, userCredential.user.uid);
   } catch (e) {
     console.log('Error when signUp with email and password', e);
@@ -60,6 +63,14 @@ export async function logOut() {
     await signOut(auth);
   } catch (e) {
     console.log('Error when loggin out:', e);
+  }
+}
+
+export async function updateAccountProfile(profileUpdates) {
+  try {
+    await updateProfile(auth.currentUser, profileUpdates);
+  } catch (e) {
+    console.log('Error when updating profile', e);
   }
 }
 

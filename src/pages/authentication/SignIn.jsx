@@ -1,9 +1,10 @@
-import { Form } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import { Button, Input } from '../../components';
+import { logInWithEmailAndPassword } from '../../firebase';
 
 import * as styles from './authentication.module.css';
 
-function SignIn() {
+export default function SignIn() {
   return (
     <section className={`container ${styles['auth-container']}`}>
       <Form method="post" className={styles.form}>
@@ -23,4 +24,11 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export async function action({ request }) {
+  const formData = await request.formData();
+  const { email, password } = Object.fromEntries(formData);
+
+  await logInWithEmailAndPassword(email, password);
+
+  return redirect('/');
+}

@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
   signOut,
@@ -55,6 +56,14 @@ export async function signUpWithEmailAndPassword(fields) {
     await addUser(fields, userCredential.user.uid);
   } catch (e) {
     console.log('Error when signUp with email and password', e);
+  }
+}
+
+export async function logInWithEmailAndPassword(email, password) {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (e) {
+    console.log('Error when signIn with email and password', e);
   }
 }
 

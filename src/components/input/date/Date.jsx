@@ -35,21 +35,13 @@ function Date({ label, descriptionHelp }) {
         options={months}
         value={month}
         name="month"
-        required
         onChange={handleOnMonthChange}
       />
-      <Select
-        options={days}
-        value={day}
-        name="day"
-        required
-        onChange={handleSetDate}
-      />
+      <Select options={days} value={day} name="day" onChange={handleSetDate} />
       <Select
         options={years}
         value={year}
         name="year"
-        required
         onChange={handleSetDate}
       />
     </InputGroup>

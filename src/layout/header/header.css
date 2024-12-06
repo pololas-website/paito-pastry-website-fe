@@ -30,7 +30,7 @@
 
     .header__main-nav--right {
       justify-content: flex-end;
-      gap: 6.8rem;
+      gap: var(--spacing-20);
     }
   }
 
@@ -49,11 +49,9 @@
   .header__buy {
     background-color: var(--color-white);
     height: 5.5rem;
-    aspect-ratio: 1 / 1;
-    font-size: 3rem;
-    color: var(--color-secondary-contrast);
-    border: 2px solid currentColor;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    font-size: 3.5rem;
+    color: var(--color-white);
+    background-color: var(--color-secondary);
 
     &:hover {
       transform: scale(1.1);

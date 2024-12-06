@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 import './users.css';
 
-import { usersApi } from '../../api';
+import { getUsers } from '../../firebase';
 
 function Users() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    usersApi.getUsers().then((data) => {
+    getUsers().then((data) => {
       setUsers(data);
     });
   }, []);
@@ -19,13 +19,13 @@ function Users() {
         Current users in the Lolita&apos;s Page!
       </h4>
       <ul className="users__list">
-        {users.map((user) => (
-          <li key={user.name} className="users__user">
+        {users.map(({ id, name, email }) => (
+          <li key={id} className="users__user">
             <span className="users__full-name big-text--1">
               <i className="fa-solid fa-user"></i>
-              {user.name}
+              {name}
             </span>
-            <span className="users__email">{user.email}</span>
+            <span className="users__email">{email}</span>
           </li>
         ))}
       </ul>

@@ -1,8 +1,11 @@
 /* **** SPACING **** */
 /* 
-  8 / 10 / 16
+  8 / 10 / 16, 20
  */
 
+/* TODO: use a spacing and typografy size scale for most or all the elements sizes */
+/* TODO: refine the color palette */
+/* TODO: make the change of theme of all the application (at least the dark theme) */
 :root {
   --font-f-titles: 'Edu AU VIC WA NT Hand', cursive;
   --font-f-page: 'Roboto', sans-serif;
@@ -44,6 +47,9 @@
 
   --zindex-bg-menu: 50;
   --zindex-menu: 51;
+
+  /* SPACING VARIABLES */
+  --spacing-20: 2rem;
 }
 
 *,

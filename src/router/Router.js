@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import MainLayout from '../layout/mainLayout/MainLayout';
-import { Cakes, SignUp, Users } from '../pages';
+import { Cakes, SignUp, SignIn, Users } from '../pages';
 
-import { action as signUpAction } from '../pages/signUp/SignUp';
+import { action as signUpAction } from '../pages/authentication/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
         path: 'signup',
         element: <SignUp />,
         action: signUpAction,
+      },
+      {
+        path: 'signin',
+        element: <SignIn />,
       },
       {
         path: 'users',

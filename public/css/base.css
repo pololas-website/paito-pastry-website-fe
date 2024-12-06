@@ -49,7 +49,10 @@
   --zindex-menu: 51;
 
   /* SPACING VARIABLES */
+  --spacing-64: 6.4rem;
+  --spacing-32: 3.2rem;
   --spacing-20: 2rem;
+  --spacing-12: 1.2rem;
 }
 
 *,
@@ -81,7 +84,8 @@ body {
 
 .container {
   max-width: 120rem;
-  margin: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .heading-1,

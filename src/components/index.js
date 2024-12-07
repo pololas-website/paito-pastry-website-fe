@@ -5,3 +5,4 @@ export { default as Date } from './input/date/Date';
 export { default as InputGroup } from './inputGroup/InputGroup';
 export { default as Select } from './input/Select';
 export { default as Tooltip } from './tooltip/Tooltip';
+export { default as Hidden } from './hidden/Hidden';

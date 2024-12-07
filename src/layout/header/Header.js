@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 
 import { Button, Input } from '../../components';
+import HiddenLoggedElement from './HiddenLoggedElement';
+
+import { logOut } from '../../firebase';
 
 import Logo from '../../../public/img/logo.png';
 import './header.css';
-import UserIcon from './UserIcon';
 
 function Header() {
   return (
@@ -12,9 +14,11 @@ function Header() {
       <nav>
         <div className="header__main-nav">
           <div className="header__main-nav--left">
-            <Button as={Link} to="/signin" className="header__link" small>
-              Sign In
-            </Button>
+            <HiddenLoggedElement>
+              <Button as={Link} to="/signin" className="header__link" small>
+                Sign In
+              </Button>
+            </HiddenLoggedElement>
             <Button as={Link} to="/" className="header__link">
               Stores
             </Button>
@@ -42,7 +46,16 @@ function Header() {
             <Button className="header__buy" rounded>
               <i className="fa-solid fa-basket-shopping"></i>
             </Button>
-            <UserIcon />
+            <HiddenLoggedElement showWhenLogged>
+              <Button
+                className="header__buy"
+                rounded
+                title="sign-out"
+                onClick={() => logOut()}
+              >
+                <i className="fa-solid fa-user"></i>
+              </Button>
+            </HiddenLoggedElement>
           </div>
         </div>
         <ul className="header__secondary-nav">

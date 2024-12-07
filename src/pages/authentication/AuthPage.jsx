@@ -7,7 +7,7 @@ function AuthElement() {
 
   if (user) navigate('/');
 
-  return Outlet;
+  return <Outlet />;
 }
 
 export default AuthElement;

@@ -1,14 +1,15 @@
 import { Form, Link, redirect } from 'react-router-dom';
-import { Button, Input } from '../../components';
-import { logInWithEmailAndPassword } from '../../firebase';
+import { Button, Divider, Input } from '../../components';
+import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 
-import * as styles from './authentication.module.css';
+import * as authStyles from './authentication.module.css';
+import * as styles from './signIn.module.css';
 
 export default function SignIn() {
   return (
-    <section className={`container ${styles['auth-container']}`}>
-      <Form method="post" className={styles.form}>
-        <h4 className={`heading-4 ${styles.title}`}>Welcome back!</h4>
+    <section className={`container ${authStyles['auth-container']}`}>
+      <Form method="post" className={authStyles.form}>
+        <h4 className={`heading-4 ${authStyles.title}`}>Welcome back!</h4>
         <Input type="email" name="email" placeholder="Email Address" required />
         <Input
           type="password"
@@ -21,7 +22,7 @@ export default function SignIn() {
         </Button>
         <Link className={styles['forgot-password']}>Forgot password?</Link>
         <div className={styles['create-account-container']}>
-          <hr />
+          <Divider />
           <Button
             as={Link}
             to="/signup"
@@ -30,6 +31,23 @@ export default function SignIn() {
           >
             Create new account
           </Button>
+          <Divider label="or sign in with" />
+          <div className={styles['provider-icons-container']}>
+            <Button
+              small
+              type="button"
+              className={styles['google-icon']}
+              onClick={() => signInWithGoogle()}
+            >
+              <i className="fa-brands fa-google"></i> Google
+            </Button>
+            <Button small type="button" className={styles['facebook-icon']}>
+              <i className="fa-brands fa-facebook"></i> Facebook
+            </Button>
+            <Button small type="button" className={styles['x-twitter-icon']}>
+              <i className="fa-brands fa-x-twitter"></i> X-twitter
+            </Button>
+          </div>
         </div>
       </Form>
     </section>

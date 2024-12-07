@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button, Input } from '../../components';
 import HiddenLoggedElement from './HiddenLoggedElement';
 
-import { logOut } from '../../firebase';
-
 import Logo from '../../../public/img/logo.png';
 import './header.css';
+import UserIcon from './UserIcon';
 
 function Header() {
   return (
@@ -39,22 +38,15 @@ function Header() {
               type="search"
               autoComplete="off"
             >
-              <Button>
+              <Button icon>
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Button>
             </Input>
-            <Button className="header__buy" rounded>
+            <Button className="header__buy" icon>
               <i className="fa-solid fa-basket-shopping"></i>
             </Button>
             <HiddenLoggedElement showWhenLogged>
-              <Button
-                className="header__buy"
-                rounded
-                title="sign-out"
-                onClick={() => logOut()}
-              >
-                <i className="fa-solid fa-user"></i>
-              </Button>
+              <UserIcon />
             </HiddenLoggedElement>
           </div>
         </div>

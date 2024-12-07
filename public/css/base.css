@@ -9,12 +9,19 @@
 :root {
   --font-f-titles: 'Edu AU VIC WA NT Hand', cursive;
   --font-f-page: 'Roboto', sans-serif;
+  --font-size-64: 6.4rem;
+  --font-size-48: 4.8rem;
+  --font-size-36: 3.6rem;
   --font-s-page: 1.6rem;
   --font-s--s: 1.4rem;
   --font-s--xs: 1.2rem;
   --font-w--sb: 500;
   --font-w--b: 700;
   --font-c-page: #472e25;
+
+  --color-google: #ea4335;
+  --color-facebook: #0866ff;
+  --color-x-twitter: #242d34;
 
   --color-white: #fff;
 
@@ -56,6 +63,7 @@
   --spacing-24: 2.4rem;
   --spacing-20: 2rem;
   --spacing-12: 1.2rem;
+  --spacing-8: 0.8rem;
 }
 
 *,

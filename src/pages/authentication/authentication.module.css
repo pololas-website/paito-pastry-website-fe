@@ -14,34 +14,3 @@
   display: grid;
   gap: var(--spacing-12);
 }
-
-.signin-button {
-  background-color: var(--color-secondary-dark);
-  text-transform: uppercase;
-  color: var(--color-white);
-
-  &:hover {
-    background-color: var(--color-secondary);
-  }
-}
-
-.forgot-password {
-  justify-self: center;
-  color: var(--color-secondary-dark);
-  font-weight: var(--font-w--sb);
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.create-account-container {
-  margin-top: var(--spacing-12);
-  display: grid;
-  gap: var(--spacing-24);
-}
-
-.create-account-button {
-  justify-self: center;
-}

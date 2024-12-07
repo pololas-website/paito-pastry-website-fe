@@ -2,13 +2,14 @@ import { Form, Link, redirect } from 'react-router-dom';
 import { Button, Divider, Input } from '../../components';
 import { logInWithEmailAndPassword } from '../../firebase';
 
-import * as styles from './authentication.module.css';
+import * as authStyles from './authentication.module.css';
+import * as styles from './signIn.module.css';
 
 export default function SignIn() {
   return (
-    <section className={`container ${styles['auth-container']}`}>
-      <Form method="post" className={styles.form}>
-        <h4 className={`heading-4 ${styles.title}`}>Welcome back!</h4>
+    <section className={`container ${authStyles['auth-container']}`}>
+      <Form method="post" className={authStyles.form}>
+        <h4 className={`heading-4 ${authStyles.title}`}>Welcome back!</h4>
         <Input type="email" name="email" placeholder="Email Address" required />
         <Input
           type="password"
@@ -30,7 +31,20 @@ export default function SignIn() {
           >
             Create new account
           </Button>
-          <Divider label="or sign in with" />
+          <div className={styles['signin-providers-container']}>
+            <Divider label="or sign in with" />
+            <div className={styles['provider-icons-container']}>
+              <Button icon className={styles['google-icon']}>
+                <i className="fa-brands fa-google"></i>
+              </Button>
+              <Button icon className={styles['facebook-icon']}>
+                <i className="fa-brands fa-facebook"></i>
+              </Button>
+              <Button icon className={styles['x-twitter-icon']}>
+                <i className="fa-brands fa-x-twitter"></i>
+              </Button>
+            </div>
+          </div>
         </div>
       </Form>
     </section>

@@ -86,7 +86,7 @@ export async function signInWithGoogle() {
 
     await addUser(userToSave, result.user.uid);
   } catch (e) {
-    console.log('Error when sinin with google: ', e);
+    console.log('Error when signingin with google: ', e);
   }
 }
 

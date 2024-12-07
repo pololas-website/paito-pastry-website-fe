@@ -7,6 +7,9 @@ import {
   onAuthStateChanged,
   updateProfile,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  getAdditionalUserInfo,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -67,11 +70,31 @@ export async function logInWithEmailAndPassword(email, password) {
   }
 }
 
+const provider = new GoogleAuthProvider();
+
+export async function signInWithGoogle() {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const {
+      profile: { given_name, family_name },
+    } = getAdditionalUserInfo(result);
+    const userToSave = {
+      name: given_name,
+      lastName: family_name,
+      email: result.user.email,
+    };
+
+    await addUser(userToSave, result.user.uid);
+  } catch (e) {
+    console.log('Error when sinin with google: ', e);
+  }
+}
+
 export async function logOut() {
   try {
     await signOut(auth);
   } catch (e) {
-    console.log('Error when loggin out:', e);
+    console.log('Error when loggin out: ', e);
   }
 }
 
@@ -79,18 +102,13 @@ export async function updateAccountProfile(profileUpdates) {
   try {
     await updateProfile(auth.currentUser, profileUpdates);
   } catch (e) {
-    console.log('Error when updating profile', e);
+    console.log('Error when updating profile: ', e);
   }
 }
 
-export async function addUser({ name, lastName, birthday, email }, uid) {
+export async function addUser(user, uid) {
   try {
-    await setDoc(doc(db, 'user', uid), {
-      name,
-      lastName,
-      birthday,
-      email,
-    });
+    await setDoc(doc(db, 'user', uid), user);
   } catch (e) {
     console.log('Error adding the new user: ', e);
   }
@@ -104,6 +122,6 @@ export async function getUsers() {
     docsSnapshot.forEach((doc) => users.push({ ...doc.data(), id: doc.id }));
     return users;
   } catch (e) {
-    console.log('Error getting Users', e);
+    console.log('Error getting Users: ', e);
   }
 }

@@ -1,6 +1,6 @@
 import { Form, Link, redirect } from 'react-router-dom';
 import { Button, Divider, Input } from '../../components';
-import { logInWithEmailAndPassword } from '../../firebase';
+import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 
 import * as authStyles from './authentication.module.css';
 import * as styles from './signIn.module.css';
@@ -33,7 +33,12 @@ export default function SignIn() {
           </Button>
           <Divider label="or sign in with" />
           <div className={styles['provider-icons-container']}>
-            <Button small type="button" className={styles['google-icon']}>
+            <Button
+              small
+              type="button"
+              className={styles['google-icon']}
+              onClick={() => signInWithGoogle()}
+            >
               <i className="fa-brands fa-google"></i> Google
             </Button>
             <Button small type="button" className={styles['facebook-icon']}>

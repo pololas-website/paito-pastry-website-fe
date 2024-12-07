@@ -39,13 +39,7 @@
 .create-account-container {
   margin-top: var(--spacing-12);
   display: grid;
-  gap: var(--spacing-36);
-
-  hr {
-    height: 0;
-    border: none;
-    border-top: 1px solid var(--color-gray-1);
-  }
+  gap: var(--spacing-24);
 }
 
 .create-account-button {

@@ -1,5 +1,5 @@
 import { Form, Link, redirect } from 'react-router-dom';
-import { Button, Input } from '../../components';
+import { Button, Divider, Input } from '../../components';
 import { logInWithEmailAndPassword } from '../../firebase';
 
 import * as styles from './authentication.module.css';
@@ -21,7 +21,7 @@ export default function SignIn() {
         </Button>
         <Link className={styles['forgot-password']}>Forgot password?</Link>
         <div className={styles['create-account-container']}>
-          <hr />
+          <Divider />
           <Button
             as={Link}
             to="/signup"
@@ -30,6 +30,7 @@ export default function SignIn() {
           >
             Create new account
           </Button>
+          <Divider label="or sign in with" />
         </div>
       </Form>
     </section>

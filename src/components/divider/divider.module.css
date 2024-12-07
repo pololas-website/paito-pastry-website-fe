@@ -1,0 +1,15 @@
+.line {
+  height: 0;
+  border: none;
+  border-top: 1px solid var(--color-gray-1);
+}
+
+.label-divider {
+  display: flex;
+  gap: var(--spacing-12);
+  align-items: center;
+
+  .line {
+    flex: 1;
+  }
+}

@@ -39,7 +39,7 @@ function Header() {
               type="search"
               autoComplete="off"
             >
-              <Button>
+              <Button icon>
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Button>
             </Input>

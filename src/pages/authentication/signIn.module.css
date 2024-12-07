@@ -29,19 +29,16 @@
   justify-self: center;
 }
 
-.signin-providers-container {
-  display: grid;
-  gap: var(--spacing-12);
-}
-
 .provider-icons-container {
   display: flex;
   justify-content: center;
   gap: var(--spacing-12);
 
   button {
-    font-size: var(--font-size-48);
     filter: sepia(60%);
+    text-transform: capitalize;
+    border: 1px solid currentColor;
+    flex: 1;
   }
 }
 

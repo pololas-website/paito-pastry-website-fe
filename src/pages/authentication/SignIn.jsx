@@ -31,19 +31,17 @@ export default function SignIn() {
           >
             Create new account
           </Button>
-          <div className={styles['signin-providers-container']}>
-            <Divider label="or sign in with" />
-            <div className={styles['provider-icons-container']}>
-              <Button icon className={styles['google-icon']}>
-                <i className="fa-brands fa-google"></i>
-              </Button>
-              <Button icon className={styles['facebook-icon']}>
-                <i className="fa-brands fa-facebook"></i>
-              </Button>
-              <Button icon className={styles['x-twitter-icon']}>
-                <i className="fa-brands fa-x-twitter"></i>
-              </Button>
-            </div>
+          <Divider label="or sign in with" />
+          <div className={styles['provider-icons-container']}>
+            <Button small type="button" className={styles['google-icon']}>
+              <i className="fa-brands fa-google"></i> Google
+            </Button>
+            <Button small type="button" className={styles['facebook-icon']}>
+              <i className="fa-brands fa-facebook"></i> Facebook
+            </Button>
+            <Button small type="button" className={styles['x-twitter-icon']}>
+              <i className="fa-brands fa-x-twitter"></i> X-twitter
+            </Button>
           </div>
         </div>
       </Form>

@@ -11,6 +11,7 @@
   --font-f-page: 'Roboto', sans-serif;
   --font-size-64: 6.4rem;
   --font-size-48: 4.8rem;
+  --font-size-36: 3.6rem;
   --font-s-page: 1.6rem;
   --font-s--s: 1.4rem;
   --font-s--xs: 1.2rem;
@@ -62,6 +63,7 @@
   --spacing-24: 2.4rem;
   --spacing-20: 2rem;
   --spacing-12: 1.2rem;
+  --spacing-8: 0.8rem;
 }
 
 *,

@@ -43,13 +43,13 @@ function Header() {
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Button>
             </Input>
-            <Button className="header__buy" rounded>
+            <Button className="header__buy" icon>
               <i className="fa-solid fa-basket-shopping"></i>
             </Button>
             <HiddenLoggedElement showWhenLogged>
               <Button
                 className="header__buy"
-                rounded
+                icon
                 title="sign-out"
                 onClick={() => logOut()}
               >

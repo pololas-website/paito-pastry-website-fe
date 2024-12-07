@@ -54,7 +54,12 @@
     background-color: var(--color-secondary);
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
+    }
+    /* TODO change this style since both user icon and buy icon use the same style */
+    img {
+      object-fit: cover;
+      height: 100%;
     }
   }
 

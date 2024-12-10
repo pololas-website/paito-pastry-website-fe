@@ -1,4 +1,4 @@
-import { Form, Link, redirect } from 'react-router-dom';
+import { Form, Link, redirect, useNavigate } from 'react-router-dom';
 import { Button, Divider, Input } from '../../components';
 import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 
@@ -6,6 +6,13 @@ import * as authStyles from './authentication.module.css';
 import * as styles from './signIn.module.css';
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
+  const handleOnSignInWithGoogle = async () => {
+    await signInWithGoogle();
+    navigate('/');
+  };
+
   return (
     <section className={`container ${authStyles['auth-container']}`}>
       <Form method="post" className={authStyles.form}>
@@ -37,7 +44,7 @@ export default function SignIn() {
               small
               type="button"
               className={styles['google-icon']}
-              onClick={() => signInWithGoogle()}
+              onClick={handleOnSignInWithGoogle}
             >
               <i className="fa-brands fa-google"></i> Google
             </Button>

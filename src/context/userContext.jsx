@@ -15,18 +15,19 @@ export default function UserProvider({ children }) {
       if (user) {
         const { accessToken, displayName, email, photoURL, phoneNumber, uid } =
           user;
-        setUser({
-          user: {
-            accessToken,
-            displayName,
-            email,
-            photoURL,
-            phoneNumber,
-            uid,
-          },
-        });
+        const basicUserData = {
+          accessToken,
+          displayName,
+          email,
+          photoURL,
+          phoneNumber,
+          uid,
+        };
+        setUser({ user: basicUserData });
+        localStorage.setItem('user', JSON.stringify(basicUserData));
       } else {
         setUser(intialUserValue);
+        localStorage.setItem('user', null);
       }
     });
   }, []);

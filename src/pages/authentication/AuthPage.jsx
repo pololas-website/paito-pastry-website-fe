@@ -1,13 +1,13 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../context/userContext';
+import { Outlet, redirect } from 'react-router-dom';
 
-function AuthElement() {
-  const { user } = useUserContext();
-  const navigate = useNavigate();
-
-  if (user) navigate('/');
-
+function AuthPage() {
   return <Outlet />;
 }
 
-export default AuthElement;
+export default AuthPage;
+
+export function loader() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  return user ? redirect('/') : null;
+}

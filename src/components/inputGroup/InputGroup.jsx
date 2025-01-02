@@ -1,6 +1,6 @@
 import { Button, Tooltip } from './../../components';
 
-import * as styles from './inputGroup.module.css';
+import styles from './inputGroup.module.css';
 
 function InputGroup({ children, label, descriptionHelp }) {
   return (

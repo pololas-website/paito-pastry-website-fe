@@ -1,4 +1,4 @@
-import * as styles from './input.module.css';
+import styles from './input.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 import { stringUtils } from './../../utils';
 

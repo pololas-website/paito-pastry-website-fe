@@ -12,6 +12,7 @@ export default [
     },
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
+      'react-hooks/exhaustive-deps': 'error',
     },
   },
   {
@@ -32,7 +33,6 @@ export default [
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      'react-hooks/exhaustive-deps': 'error',
     },
   },
 ];

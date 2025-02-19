@@ -1,4 +1,4 @@
-import styles from './card.module.css';
+import * as styles from './card.module.css';
 
 function Card({ children, className }) {
   return <div className={`${styles.card} ${className}`}>{children}</div>;

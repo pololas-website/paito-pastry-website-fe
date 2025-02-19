@@ -1,7 +1,7 @@
-import SmallCake from '/img/small-cake.jpg';
-import MediumCake from '/img/medium-cake.jpg';
-import LargeCake from '/img/large-cake.jpg';
-import ExtraLargeCake from '/img/extra-large-cake.jpg';
+import SmallCake from '../../../public/img/small-cake.jpg';
+import MediumCake from '../../../public/img/medium-cake.jpg';
+import LargeCake from '../../../public/img/large-cake.jpg';
+import ExtraLargeCake from '../../../public/img/extra-large-cake.jpg';
 import './cakes.css';
 
 import { Card } from '../../components';

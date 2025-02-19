@@ -9,7 +9,7 @@ import {
 
 import { signUpWithEmailAndPassword } from '../../firebase';
 
-import styles from './authentication.module.css';
+import * as styles from './authentication.module.css';
 
 export default function SignUp() {
   return (

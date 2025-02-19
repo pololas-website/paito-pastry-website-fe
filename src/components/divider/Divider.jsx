@@ -1,4 +1,4 @@
-import styles from './divider.module.css';
+import * as styles from './divider.module.css';
 
 function Divider({ label }) {
   if (!label) return <hr className={styles.line} />;

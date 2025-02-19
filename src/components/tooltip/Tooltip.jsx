@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import styles from './tooltip.module.css';
+import * as styles from './tooltip.module.css';
 import { useFadeAnimation, useDisableScroll } from '../core/hooks/domHooks';
 
 function Tooltip({ children, description }) {

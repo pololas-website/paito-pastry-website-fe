@@ -1,33 +1,32 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { onSignInStateChanged } from '../firebase';
+import { User } from '../firebase';
 
-const intialUserValue = { user: null };
+interface IUserContext {
+  user: User | null;
+}
+
+const intialUserValue: IUserContext = { user: null };
 const userContext = createContext(intialUserValue);
 export const useUserContext = () => useContext(userContext);
 
 // TODO: Analize if this should be in a redux global state and migrate if needed.
-export default function UserProvider({ children }) {
+export default function UserProvider({
+  children,
+}: {
+  children: React.ReactElement;
+}) {
   const [user, setUser] = useState(intialUserValue);
 
   useEffect(() => {
     onSignInStateChanged((user) => {
-      // TODO: with typescript this should be easy since types filter fields to the object.
       if (user) {
-        const { accessToken, displayName, email, photoURL, phoneNumber, uid } =
-          user;
-        const basicUserData = {
-          accessToken,
-          displayName,
-          email,
-          photoURL,
-          phoneNumber,
-          uid,
-        };
-        setUser({ user: basicUserData });
-        localStorage.setItem('user', JSON.stringify(basicUserData));
+        console.log(user);
+        setUser({ user });
+        localStorage.setItem('user', JSON.stringify(user));
       } else {
         setUser(intialUserValue);
-        localStorage.setItem('user', null);
+        localStorage.setItem('user', 'null');
       }
     });
   }, []);

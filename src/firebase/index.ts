@@ -10,7 +10,11 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   getAdditionalUserInfo,
+  AdditionalUserInfo,
+  NextOrObserver,
+  User,
 } from 'firebase/auth';
+export type { User } from 'firebase/auth';
 import {
   getFirestore,
   doc,
@@ -18,6 +22,7 @@ import {
   getDocs,
   collection,
 } from 'firebase/firestore';
+import { ISignupEmailPasswordParams, IUpdateAccountParams } from './types';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -41,14 +46,16 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-export function onSignInStateChanged(callback) {
+export function onSignInStateChanged(callback: NextOrObserver<User>) {
   return onAuthStateChanged(auth, callback);
 }
 
 // TODO: add Verify Email workflow when signing up.
-export async function signUpWithEmailAndPassword(fields) {
+export async function signUpWithEmailAndPassword(
+  userData: ISignupEmailPasswordParams,
+) {
   try {
-    const { name, lastName, email, password } = fields;
+    const { name, lastName, email, password } = userData;
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -56,13 +63,16 @@ export async function signUpWithEmailAndPassword(fields) {
     );
 
     await updateAccountProfile({ displayName: `${name} ${lastName}` });
-    await addUser(fields, userCredential.user.uid);
+    await addUser(userData, userCredential.user.uid);
   } catch (e) {
     console.log('Error when signUp with email and password', e);
   }
 }
 
-export async function logInWithEmailAndPassword(email, password) {
+export async function logInWithEmailAndPassword(
+  email: string,
+  password: string,
+) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (e) {
@@ -75,13 +85,11 @@ const provider = new GoogleAuthProvider();
 export async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, provider);
-    const {
-      profile: { given_name, family_name },
-    } = getAdditionalUserInfo(result);
+    const { profile } = getAdditionalUserInfo(result) as AdditionalUserInfo;
     const userToSave = {
-      name: given_name,
-      lastName: family_name,
-      email: result.user.email,
+      name: profile?.['given_name'] as string,
+      lastName: profile?.['family_name'] as string,
+      email: result.user.email!,
     };
 
     await addUser(userToSave, result.user.uid);
@@ -98,15 +106,19 @@ export async function logOut() {
   }
 }
 
-export async function updateAccountProfile(profileUpdates) {
+export async function updateAccountProfile(
+  profileUpdates: IUpdateAccountParams,
+) {
   try {
+    if (!auth.currentUser) throw new Error('Current user doesnot exist');
+
     await updateProfile(auth.currentUser, profileUpdates);
   } catch (e) {
     console.log('Error when updating profile: ', e);
   }
 }
 
-export async function addUser(user, uid) {
+export async function addUser(user: client.IUser, uid: string) {
   try {
     await setDoc(doc(db, 'user', uid), user);
   } catch (e) {
@@ -117,7 +129,9 @@ export async function addUser(user, uid) {
 export async function getUsers() {
   try {
     const docsSnapshot = await getDocs(collection(db, 'user'));
-    const users = [];
+
+    // TODO: set a better type for the application users than this current generic.
+    const users: { [key in string]: string }[] = [];
 
     docsSnapshot.forEach((doc) => users.push({ ...doc.data(), id: doc.id }));
     return users;

@@ -3,10 +3,11 @@ import pluginJs from '@eslint/js';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import tseslint from 'typescript-eslint';
 
 export default [
   {
-    files: ['src/**/*.{js,mjs,cjs,jsx}'],
+    files: ['src/**/*.{js,mjs,cjs,jsx,ts,tsx}'],
     plugins: {
       'react-hooks': pluginReactHooks,
     },
@@ -16,6 +17,11 @@ export default [
     },
   },
   {
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -26,6 +32,7 @@ export default [
   },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
+  ...tseslint.configs.recommended,
   eslintConfigPrettier,
 
   {

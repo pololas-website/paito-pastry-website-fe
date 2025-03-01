@@ -11,3 +11,9 @@ export type PolymorphicComponent<
   CustomProps = EmptyObject,
 > = React.PropsWithChildren<AsProp<C> & CustomProps> &
   Omit<React.ComponentPropsWithoutRef<C>, keyof CustomProps>;
+/*
+  TODO:
+    Currently we are using the React.ComponentPropsWithoutRef<T> built-in props
+    The task is to adap it to use the version with the Ref property which is
+    React.ComponentPropsWithRef<T>
+   */

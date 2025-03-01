@@ -1,7 +1,15 @@
 import { Hidden } from '../../components';
 import { useUserContext } from '../../context/userContext';
 
-function HiddenLoggedElement({ showWhenLogged = false, children }) {
+interface IHiddenLoggedElementProps {
+  showWhenLogged?: boolean;
+  children: React.ReactNode;
+}
+
+function HiddenLoggedElement({
+  showWhenLogged = false,
+  children,
+}: IHiddenLoggedElementProps) {
   const { user } = useUserContext();
 
   const showElement = (!user && !showWhenLogged) || (!!user && showWhenLogged);

@@ -27,7 +27,9 @@ export default function SignIn() {
         <Button type="submit" className={styles['signin-button']}>
           Sign In
         </Button>
-        <Link className={styles['forgot-password']}>Forgot password?</Link>
+        <Link className={styles['forgot-password']} to="">
+          Forgot password?
+        </Link>
         <div className={styles['create-account-container']}>
           <Divider />
           <Button
@@ -61,11 +63,11 @@ export default function SignIn() {
   );
 }
 
-export async function action({ request }) {
+export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const { email, password } = Object.fromEntries(formData);
 
-  await logInWithEmailAndPassword(email, password);
+  await logInWithEmailAndPassword(email as string, password as string);
 
   return redirect('/');
 }

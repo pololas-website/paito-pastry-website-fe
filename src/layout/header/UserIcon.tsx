@@ -19,6 +19,7 @@ function UserIcon() {
       ) : (
         // TODO: Test with ah https when uploaded to firebase hosting
         //       And know exactly how the referrerPolicy works when fetching data.
+        //       without the referrerPolicy prop in the image the image can't be loaded.
         <img
           src={user.photoURL}
           alt="Profile photo"

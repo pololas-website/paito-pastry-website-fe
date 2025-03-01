@@ -7,6 +7,11 @@ import Logo from '../../../public/img/logo.png';
 import './header.css';
 import UserIcon from './UserIcon';
 
+/*
+TODO:
+  Analize if we have to change here to use css modules instead of commmon styles
+*/
+
 function Header() {
   return (
     <header className="main-header">

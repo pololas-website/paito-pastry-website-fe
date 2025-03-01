@@ -2,8 +2,8 @@ import { Form, Link, redirect, useNavigate } from 'react-router-dom';
 import { Button, Divider, Input } from '../../components';
 import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 
-import * as authStyles from './authentication.module.css';
-import * as styles from './signIn.module.css';
+import authStyles from './authentication.module.css';
+import styles from './signIn.module.css';
 
 export default function SignIn() {
   const navigate = useNavigate();

@@ -30,6 +30,8 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: {
+                namedExport: false,
+                exportLocalsConvention: 'as-is',
                 auto: true,
                 localIdentName: 'vmc__[name]__[local]--[hash:base64:5]',
               },

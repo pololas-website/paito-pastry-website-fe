@@ -9,7 +9,7 @@ import {
 
 import { signUpWithEmailAndPassword } from '../../firebase';
 
-import * as styles from './authentication.module.css';
+import styles from './authentication.module.css';
 
 export default function SignUp() {
   return (
@@ -41,13 +41,20 @@ export default function SignUp() {
   );
 }
 
-export async function action({ request }) {
+export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
-  const fields = Object.fromEntries(formData);
-  const { day, month, year } = fields;
+  const day = formData.get('day');
+  const month = formData.get('month');
+  const year = formData.get('year');
   const birthday = new Date(`${year} ${month} ${day}`).toLocaleDateString();
 
-  await signUpWithEmailAndPassword({ ...fields, birthday });
+  await signUpWithEmailAndPassword(
+    formData.get('name') as string,
+    formData.get('lastName') as string,
+    formData.get('email') as string,
+    birthday,
+    formData.get('password') as string,
+  );
 
   return redirect('/users');
 }

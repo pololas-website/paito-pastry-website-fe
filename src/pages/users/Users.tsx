@@ -5,11 +5,11 @@ import './users.css';
 import { getUsers } from '../../firebase';
 
 function Users() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<client.IUser[]>([]);
 
   useEffect(() => {
     getUsers().then((data) => {
-      setUsers(data);
+      setUsers(data ?? []);
     });
   }, []);
 

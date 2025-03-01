@@ -22,7 +22,7 @@ import {
   getDocs,
   collection,
 } from 'firebase/firestore';
-import { ISignupEmailPasswordParams, IUpdateAccountParams } from './types';
+import { IUpdateAccountParams } from './types';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -52,10 +52,13 @@ export function onSignInStateChanged(callback: NextOrObserver<User>) {
 
 // TODO: add Verify Email workflow when signing up.
 export async function signUpWithEmailAndPassword(
-  userData: ISignupEmailPasswordParams,
+  name: string,
+  lastName: string,
+  email: string,
+  birthday: string,
+  password: string,
 ) {
   try {
-    const { name, lastName, email, password } = userData;
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -63,7 +66,15 @@ export async function signUpWithEmailAndPassword(
     );
 
     await updateAccountProfile({ displayName: `${name} ${lastName}` });
-    await addUser(userData, userCredential.user.uid);
+    await addUser(
+      {
+        name,
+        lastName,
+        email,
+        birthday,
+      },
+      userCredential.user.uid,
+    );
   } catch (e) {
     console.log('Error when signUp with email and password', e);
   }
@@ -126,14 +137,16 @@ export async function addUser(user: client.IUser, uid: string) {
   }
 }
 
-export async function getUsers() {
+export async function getUsers(): Promise<client.IUser[] | undefined> {
   try {
     const docsSnapshot = await getDocs(collection(db, 'user'));
 
     // TODO: set a better type for the application users than this current generic.
-    const users: { [key in string]: string }[] = [];
+    const users: client.IUser[] = [];
 
-    docsSnapshot.forEach((doc) => users.push({ ...doc.data(), id: doc.id }));
+    docsSnapshot.forEach((doc) =>
+      users.push({ ...doc.data(), id: doc.id } as unknown as client.IUser),
+    );
     return users;
   } catch (e) {
     console.log('Error getting Users: ', e);

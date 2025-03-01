@@ -1,8 +1,14 @@
 import { Button, Tooltip } from './../../components';
 
-import * as styles from './inputGroup.module.css';
+import styles from './inputGroup.module.css';
 
-function InputGroup({ children, label, descriptionHelp }) {
+interface IInputGroupProps {
+  children: React.ReactNode;
+  label?: string;
+  descriptionHelp?: string | React.ReactNode;
+}
+
+function InputGroup({ children, label, descriptionHelp }: IInputGroupProps) {
   return (
     <div>
       {label && (

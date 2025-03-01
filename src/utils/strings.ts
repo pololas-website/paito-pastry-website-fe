@@ -5,6 +5,9 @@
  * @param {string} separator character separator to between each string
  * @returns a string composed for all strings
  */
-export function join(stringArray = [], separator = ' ') {
+export function join(
+  stringArray: Array<string | undefined> = [],
+  separator = ' ',
+) {
   return stringArray.filter((s) => !!s).join(separator);
 }

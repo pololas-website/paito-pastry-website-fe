@@ -21,7 +21,6 @@ export default function UserProvider({
   useEffect(() => {
     onSignInStateChanged((user) => {
       if (user) {
-        console.log(user);
         setUser({ user });
         localStorage.setItem('user', JSON.stringify(user));
       } else {

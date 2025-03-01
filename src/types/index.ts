@@ -2,6 +2,7 @@
 declare global {
   namespace client {
     interface IUser {
+      id?: string;
       name: string;
       lastName: string;
       email: string;

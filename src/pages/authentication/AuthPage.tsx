@@ -7,7 +7,7 @@ function AuthPage() {
 export default AuthPage;
 
 export function loader() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user') ?? 'null');
 
   return user ? redirect('/') : null;
 }

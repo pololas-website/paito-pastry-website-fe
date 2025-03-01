@@ -12,6 +12,7 @@ module.exports = {
   module: {
     rules: [
       {
+        // TODO: check if this configuration is necessary since we don't have any js file to load for the application
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/,

@@ -52,12 +52,12 @@
     "webpack-dev-server": "^5.0.4"
   },
   "lint-staged": {
-    "*.{js,ts}": [
+    "*.{ts}": [
       "jest --bail --findRelatedTests --passWithNoTests",
       "eslint --fix",
       "prettier --write  --ignore-unknown"
     ],
-    "!(*.js|*.ts)": "prettier --write --ignore-unknown"
+    "!(*.ts)": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "firebase": "^11.0.2",

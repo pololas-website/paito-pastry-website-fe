@@ -5,6 +5,8 @@ import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 import authStyles from './authentication.module.css';
 import styles from './signIn.module.css';
 
+// Initial commit for implement the application form validation
+
 export default function SignIn() {
   const navigate = useNavigate();
 

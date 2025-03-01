@@ -1,0 +1,42 @@
+import { useRef } from 'react';
+import styles from './tooltip.module.css';
+import { useFadeAnimation, useDisableScroll } from '../core/hooks/domHooks';
+
+interface ITooltipProps {
+  children: React.ReactNode;
+  description: string | React.ReactNode;
+}
+
+function Tooltip({ children, description }: ITooltipProps) {
+  const tooltipContainderRef = useRef(null);
+  const [fadeIn, setFadeIn] = useFadeAnimation(tooltipContainderRef);
+
+  useDisableScroll(fadeIn);
+
+  function handleHideToolTip(e: React.MouseEvent) {
+    e.stopPropagation();
+    setFadeIn(false);
+  }
+
+  return (
+    <div className={styles.container} onClick={() => setFadeIn(true)}>
+      {children}
+      {fadeIn && (
+        <>
+          <div
+            className={styles['background-layer']}
+            onClick={(e) => handleHideToolTip(e)}
+          ></div>
+          <div
+            className={styles['tooltip-container']}
+            ref={tooltipContainderRef}
+          >
+            {description}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default Tooltip;

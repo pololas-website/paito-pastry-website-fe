@@ -1,4 +1,4 @@
-export function getSimpleSequence(start, end) {
+export function getSimpleSequence(start: number, end: number) {
   try {
     return Array(end + 1 - start)
       .fill(0)

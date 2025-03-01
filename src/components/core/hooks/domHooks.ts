@@ -4,7 +4,7 @@ import { domUtils } from '../../../utils';
 const body = document.body;
 const html = document.documentElement;
 
-export function useDisableScroll(disable) {
+export function useDisableScroll(disable: boolean) {
   useEffect(() => {
     if (domUtils.isOverFlowing(html)) {
       html.style.overflow = disable ? 'hidden' : '';
@@ -13,25 +13,27 @@ export function useDisableScroll(disable) {
   }, [disable]);
 }
 
-export function useFadeAnimation(elementRef) {
+export function useFadeAnimation(
+  elementRef: React.MutableRefObject<HTMLElement | null>,
+): [boolean, (fade: boolean) => void] {
   const [visible, setVisible] = useState(false);
   const timeTransition = 400;
-  const transition = `opacity 400ms ease-in-out`;
+  const transition = `opacity ${timeTransition}ms ease-in-out`;
 
   useEffect(() => {
     if (visible) {
-      elementRef.current.style.transition = transition;
-      setTimeout(() => (elementRef.current.style.opacity = '1'), 0);
+      elementRef.current!.style.transition = transition;
+      setTimeout(() => (elementRef.current!.style.opacity = '1'), 0);
     }
   }, [visible, elementRef, transition]);
 
-  const setFadeIn = (fade) => {
+  const setFadeIn = (fade: boolean) => {
     if (fade) {
       setVisible(true);
       return;
     }
 
-    elementRef.current.style.opacity = '0';
+    elementRef.current!.style.opacity = '0';
     setTimeout(() => setVisible(false), timeTransition);
   };
 

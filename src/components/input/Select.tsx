@@ -1,8 +1,22 @@
 import styles from './input.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 import { stringUtils } from './../../utils';
+import { SelectHTMLAttributes } from 'react';
 
-function Select({ className, options, onChange, ...rest }) {
+export interface IChangedOption {
+  name: string;
+  value: string;
+}
+
+type CustomProps = {
+  options?: string[] | number[];
+  onChange: ({ name, value }: IChangedOption) => void;
+};
+
+type SelectProps = CustomProps &
+  Omit<SelectHTMLAttributes<HTMLSelectElement>, keyof CustomProps>;
+
+function Select({ className, options = [], onChange, ...rest }: SelectProps) {
   const classNames = stringUtils.join([styles.input, className]);
 
   return (
@@ -12,7 +26,7 @@ function Select({ className, options, onChange, ...rest }) {
       {...rest}
     >
       {options.map((option) => (
-        <option key={option} label={option} value={option} />
+        <option key={option} label={option.toString()} value={option} />
       ))}
     </select>
   );

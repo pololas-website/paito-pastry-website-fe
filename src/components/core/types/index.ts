@@ -2,9 +2,6 @@
 const emptySymbol = Symbol('EmptyObject type');
 export type EmptyObject = { [emptySymbol]?: never };
 
-const emptyobject: EmptyObject = {};
-console.log(emptyobject);
-
 type AsProp<C extends React.ElementType> = {
   as?: C;
 };

@@ -1,8 +1,14 @@
 import { useMemo, useState } from 'react';
 import { InputGroup, Select } from '../../../components';
 import * as dateUtils from './dateComponentUtils';
+import { IChangedOption } from '../Select';
 
-function Date({ label, descriptionHelp }) {
+interface IDateProps {
+  label?: string;
+  descriptionHelp?: string | React.ReactNode;
+}
+
+function Date({ label, descriptionHelp }: IDateProps) {
   const now = dateUtils.getInitialDate();
   const [{ month, day, year }, setDate] = useState(now);
   const months = dateUtils.MONTH_OPTIONS;
@@ -12,18 +18,18 @@ function Date({ label, descriptionHelp }) {
   );
   const years = useMemo(() => dateUtils.getYearOptions(now.year), [now.year]);
 
-  function handleSetDate({ name, value }) {
+  function handleSetDate({ name, value }: IChangedOption) {
     setDate((date) => ({
       ...date,
       [name]: name === 'month' ? value : +value,
     }));
   }
 
-  function handleOnMonthChange(updatedData) {
+  function handleOnMonthChange(updatedData: IChangedOption) {
     const monthDays = dateUtils.getMonthNumberOfDays(month, year);
 
     if (day > monthDays) {
-      handleSetDate({ name: 'day', value: monthDays });
+      handleSetDate({ name: 'day', value: monthDays.toString() });
     }
 
     handleSetDate(updatedData);

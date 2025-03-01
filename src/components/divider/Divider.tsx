@@ -1,6 +1,6 @@
 import styles from './divider.module.css';
 
-function Divider({ label }) {
+function Divider({ label }: { label?: string }) {
   if (!label) return <hr className={styles.line} />;
 
   return (

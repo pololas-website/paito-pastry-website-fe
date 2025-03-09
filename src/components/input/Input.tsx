@@ -2,9 +2,12 @@ import styles from './input.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 import { forwardRef, InputHTMLAttributes } from 'react';
 import { stringUtils } from '../../utils';
-import { IStyles } from '../core/HOC/baseElement/baseElement.utils';
+import {
+  IBasicClasses,
+  IStyles,
+} from '../core/HOC/baseElement/baseElement.utils';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
+type InputProps = InputHTMLAttributes<HTMLInputElement> & IBasicClasses;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, children, ...rest }: InputProps, ref) => {
@@ -22,4 +25,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-export default withBaseInlineElement(Input, styles as unknown as IStyles);
+export default withBaseInlineElement<'input', InputProps>(
+  Input as React.ForwardRefExoticComponent<
+    React.ComponentPropsWithRef<'input'> & InputProps
+  >,
+  styles as unknown as IStyles,
+);

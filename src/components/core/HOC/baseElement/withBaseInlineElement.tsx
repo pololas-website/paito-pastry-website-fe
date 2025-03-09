@@ -1,34 +1,43 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+
+import { ElementType } from 'react';
 import {
   getComposedClassName,
   IStyles,
   IBasicClasses,
 } from './baseElement.utils';
+import { polymorphicForwardRef } from '../../types';
 
-function withBaseInlineElement<P extends { className?: string }>(
-  Component: React.ComponentType<P>,
+interface IWithBaseInlineElementProps extends IBasicClasses {
+  className?: string;
+}
+
+function withBaseInlineElement<P extends ElementType, ExtraProps = {}>(
+  Component: React.ForwardRefExoticComponent<
+    React.ComponentPropsWithRef<P> & ExtraProps
+  >,
   moduleStyles: IStyles,
 ) {
-  return function BaseInlineElement({
-    small,
-    primary,
-    contrast,
-    className,
-    ...rest
-  }: IBasicClasses & P) {
-    const composedClassName = getComposedClassName(
-      {
-        small,
-        primary,
-        contrast,
-      },
-      moduleStyles,
-      className,
-    );
+  return polymorphicForwardRef<P, IWithBaseInlineElementProps & ExtraProps>(
+    ({ small, primary, contrast, className, ...rest }, ref) => {
+      const composedClassName = getComposedClassName(
+        {
+          small,
+          primary,
+          contrast,
+        },
+        moduleStyles,
+        className,
+      );
 
-    const props = { ...rest, className: composedClassName } as P;
+      const props = {
+        ...rest,
+        className: composedClassName,
+      } as React.ComponentPropsWithRef<P> & ExtraProps;
 
-    return <Component {...props} />;
-  };
+      return <Component {...props} ref={ref} />;
+    },
+  );
 }
 
 export default withBaseInlineElement;

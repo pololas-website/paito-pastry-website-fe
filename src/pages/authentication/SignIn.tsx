@@ -2,6 +2,9 @@ import { Link, redirect, useNavigate, useSubmit } from 'react-router-dom';
 import { Button, Divider, Input } from '../../components';
 import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import isStrongPassword from 'validator/es/lib/isStrongPassword';
 
 import authStyles from './authentication.module.css';
 import styles from './signIn.module.css';
@@ -10,10 +13,34 @@ interface IFormData {
   password: string;
 }
 
+const EMAIL_ERROR_MESSAGE = 'Please provide a valid Email Address';
+const PASSWORD_ERROR_MESSAGE =
+  'The pasword should contain at least 8 characters with at least one: uppercase, lowercase, number and symbol character';
+
+const formSchema = z.object({
+  email: z
+    .string({ required_error: EMAIL_ERROR_MESSAGE })
+    .email(EMAIL_ERROR_MESSAGE),
+  /* TODO: 
+    For the isStrongPassword validator, improve the validation in order to get the exact errors
+    Examples to take on account:
+    - if symbols are missing: the specific error message should reflect that and the same for the other parameters
+    - make a strong password line animated interface as other applications like google or facebook.
+    - with the strong password show if your password are strong/medium/weak according to the score obtained by the function.
+  */
+  password: z
+    .string({ required_error: PASSWORD_ERROR_MESSAGE })
+    .refine((p) => isStrongPassword(p), { message: PASSWORD_ERROR_MESSAGE }),
+});
+
 export default function SignIn() {
   const navigate = useNavigate();
   const submit = useSubmit();
-  const { register, handleSubmit } = useForm<IFormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     const formData = new FormData();
@@ -27,29 +54,22 @@ export default function SignIn() {
     navigate('/');
   };
 
+  // TODO: Implement errors user Interface in the forms and delete this console.log
+  console.log(errors);
+
   return (
     <section className={`container ${authStyles['auth-container']}`}>
       <form className={authStyles.form} onSubmit={handleSubmit(onSubmit)}>
         <h4 className={`heading-4 ${authStyles.title}`}>Welcome back!</h4>
-        {/* TODO:
-          Currently there's a warning in the console about: Function components cannot be given refs.
-          This is due to when applying a special HOOK to the forwarded ref input component, The HOC is returning          
-          a parameter component. The solution is that the HOC should return another forward component to
-          delete this warning.
-          Currently the typings are complex.
-          Apply the proposed solution with the right typing.
-          Components to test at this time: Input.
-          HOC to test: withBaseInlineElement.
-        */}
         <Input
           type="email"
           placeholder="Email Address"
-          {...register('email', { required: true })}
+          {...register('email')}
         />
         <Input
           type="password"
           placeholder="Password"
-          {...register('password', { required: true })}
+          {...register('password')}
         />
         <Button type="submit" className={styles['signin-button']}>
           Sign In

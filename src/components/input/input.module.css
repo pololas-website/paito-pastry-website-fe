@@ -50,5 +50,10 @@
 }
 
 .error {
-  border-color: red;
+  border-color: var(--color-error);
+
+  & + span {
+    color: var(--color-error);
+    font-size: var(--font-s--s);
+  }
 }

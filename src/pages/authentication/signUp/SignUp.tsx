@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   Date as DateComponent,
+  Select,
 } from '../../../components';
 
 import { signUpWithEmailAndPassword } from '../../../firebase';
@@ -20,7 +21,18 @@ export default function SignUp() {
           <Input type="text" name="name" placeholder="First Name" />
           <Input type="text" name="lastName" placeholder="Last Name" />
         </InputGroup>
-        <DateComponent label="Birthday" descriptionHelp="help text" />
+        <DateComponent>
+          {(monthProps, dayProps, yearProps) => (
+            <InputGroup
+              label="Birthday"
+              descriptionHelp="Change the description!"
+            >
+              <Select {...monthProps} />
+              <Select {...dayProps} />
+              <Select {...yearProps} />
+            </InputGroup>
+          )}
+        </DateComponent>
         <Input type="email" name="email" placeholder="Email Address" required />
         <Input
           type="password"

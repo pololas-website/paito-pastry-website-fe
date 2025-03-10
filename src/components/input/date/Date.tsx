@@ -1,14 +1,23 @@
 import { useMemo, useState } from 'react';
-import { InputGroup, Select } from '../../../components';
 import * as dateUtils from './dateComponentUtils';
 import { IChangedOption } from '../Select';
 
-interface IDateProps {
-  label?: string;
-  descriptionHelp?: string | React.ReactNode;
+interface IOptionProps<T extends number | string> {
+  options: T[];
+  value: T;
+  name: string;
+  onChange: ({ name, value }: IChangedOption) => void;
 }
 
-function Date({ label, descriptionHelp }: IDateProps) {
+interface IDateProps {
+  children: (
+    monthProps: IOptionProps<string>,
+    dayProps: IOptionProps<number>,
+    yearProps: IOptionProps<number>,
+  ) => React.ReactElement;
+}
+
+function Date({ children }: IDateProps) {
   const now = dateUtils.getInitialDate();
   const [{ month, day, year }, setDate] = useState(now);
   const months = dateUtils.MONTH_OPTIONS;
@@ -35,23 +44,28 @@ function Date({ label, descriptionHelp }: IDateProps) {
     handleSetDate(updatedData);
   }
 
-  return (
-    <InputGroup label={label} descriptionHelp={descriptionHelp}>
-      <Select
-        options={months}
-        value={month}
-        name="month"
-        onChange={handleOnMonthChange}
-      />
-      <Select options={days} value={day} name="day" onChange={handleSetDate} />
-      <Select
-        options={years}
-        value={year}
-        name="year"
-        onChange={handleSetDate}
-      />
-    </InputGroup>
-  );
+  const monthProps = {
+    options: months,
+    value: month,
+    name: 'month',
+    onChange: handleOnMonthChange,
+  };
+
+  const dayProps = {
+    options: days,
+    value: day,
+    name: 'day',
+    onChange: handleSetDate,
+  };
+
+  const yearProps = {
+    options: years,
+    value: year,
+    name: 'year',
+    onChange: handleSetDate,
+  };
+
+  return children(monthProps, dayProps, yearProps);
 }
 
 export default Date;

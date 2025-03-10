@@ -19,12 +19,13 @@ function withBaseInlineElement<P extends ElementType, ExtraProps = {}>(
   moduleStyles: IStyles,
 ) {
   return polymorphicForwardRef<P, IWithBaseInlineElementProps & ExtraProps>(
-    ({ small, primary, contrast, className, ...rest }, ref) => {
+    ({ small, primary, contrast, error, className, ...rest }, ref) => {
       const composedClassName = getComposedClassName(
         {
           small,
           primary,
           contrast,
+          error,
         },
         moduleStyles,
         className,

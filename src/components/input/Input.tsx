@@ -21,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </span>
       );
 
-    return <input className={classNames} {...rest} />;
+    return <input className={classNames} {...rest} ref={ref} />;
   },
 );
 

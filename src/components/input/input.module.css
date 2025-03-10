@@ -48,3 +48,7 @@
   border-radius: var(--border-radius-s);
   padding: 0.5rem 0.8rem;
 }
+
+.error {
+  border-color: red;
+}

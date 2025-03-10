@@ -44,13 +44,16 @@ export default function SignIn() {
         <Input
           type="email"
           placeholder="Email Address"
+          error={!!errors.email}
           {...register('email')}
         />
         <Input
           type="password"
           placeholder="Password"
+          error={!!errors.password}
           {...register('password')}
         />
+
         <Button type="submit" className={styles['signin-button']}>
           Sign In
         </Button>

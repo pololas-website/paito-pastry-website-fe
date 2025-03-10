@@ -1,15 +1,21 @@
-import { useMemo, useState } from 'react';
-import * as dateUtils from './dateComponentUtils';
-import { IChangedOption } from '../Select';
+import { useRef } from 'react';
+import {
+  getDayOptions,
+  getYearOptions,
+  MONTH_OPTIONS,
+  getInitialDate,
+  getMonthNumberOfDays,
+} from './dateComponentUtils';
 
 interface IOptionProps<T extends number | string> {
+  defaultValue: T;
   options: T[];
-  value: T;
   name: string;
-  onChange: ({ name, value }: IChangedOption) => void;
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  ref?: React.MutableRefObject<HTMLSelectElement | null>;
 }
 
-interface IDateProps {
+export interface IDateProps {
   children: (
     monthProps: IOptionProps<string>,
     dayProps: IOptionProps<number>,
@@ -17,52 +23,56 @@ interface IDateProps {
   ) => React.ReactElement;
 }
 
+// TODO: Test this component with React testing library
 function Date({ children }: IDateProps) {
-  const now = dateUtils.getInitialDate();
-  const [{ month, day, year }, setDate] = useState(now);
-  const months = dateUtils.MONTH_OPTIONS;
-  const days = useMemo(
-    () => dateUtils.getDayOptions(month, year),
-    [month, year],
-  );
-  const years = useMemo(() => dateUtils.getYearOptions(now.year), [now.year]);
+  const daySelectRef = useRef<HTMLSelectElement | null>(null);
+  const monthSelectRef = useRef<HTMLSelectElement | null>(null);
+  const yearSelectRef = useRef<HTMLSelectElement | null>(null);
+  const { month, day, year } = getInitialDate();
+  let days: number[] = [];
+  const months = MONTH_OPTIONS;
+  const years = getYearOptions(Number(yearSelectRef.current?.value ?? year));
+  setDayOptions();
 
-  function handleSetDate({ name, value }: IChangedOption) {
-    setDate((date) => ({
-      ...date,
-      [name]: name === 'month' ? value : +value,
-    }));
+  function setDayOptions() {
+    days = getDayOptions(
+      monthSelectRef.current?.value ?? month,
+      Number(yearSelectRef.current?.value ?? year),
+    );
   }
 
-  function handleOnMonthChange(updatedData: IChangedOption) {
-    const monthDays = dateUtils.getMonthNumberOfDays(month, year);
+  function handleOnMonthChange() {
+    const monthDays = getMonthNumberOfDays(
+      monthSelectRef.current?.value ?? month,
+      Number(yearSelectRef.current?.value ?? year),
+    );
+    const day = Number(daySelectRef.current!.value);
 
-    if (day > monthDays) {
-      handleSetDate({ name: 'day', value: monthDays.toString() });
-    }
+    if (day > monthDays) daySelectRef.current!.value = monthDays.toString();
 
-    handleSetDate(updatedData);
+    setDayOptions();
   }
 
   const monthProps = {
+    defaultValue: month,
     options: months,
-    value: month,
     name: 'month',
     onChange: handleOnMonthChange,
+    ref: monthSelectRef,
   };
 
   const dayProps = {
+    defaultValue: day,
     options: days,
-    value: day,
     name: 'day',
-    onChange: handleSetDate,
+    ref: daySelectRef,
   };
 
   const yearProps = {
+    defaultValue: year,
     options: years,
-    value: year,
     name: 'year',
-    onChange: handleSetDate,
+    ref: yearSelectRef,
   };
 
   return children(monthProps, dayProps, yearProps);

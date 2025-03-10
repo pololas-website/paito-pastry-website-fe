@@ -15,6 +15,12 @@ export const MONTH_OPTIONS = [
   'Dec',
 ];
 
+export interface IDateValue {
+  month: string;
+  day: number;
+  year: number;
+}
+
 export function getInitialDate() {
   const today = new Date();
   return {

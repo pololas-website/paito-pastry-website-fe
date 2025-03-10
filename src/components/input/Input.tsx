@@ -2,26 +2,33 @@ import styles from './input.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 import { forwardRef, InputHTMLAttributes } from 'react';
 import { stringUtils } from '../../utils';
-import {
-  IBasicClasses,
-  IStyles,
-} from '../core/HOC/baseElement/baseElement.utils';
+import { IStyles } from '../core/HOC/baseElement/baseElement.utils';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & IBasicClasses;
+interface CustomProps {
+  error?: string;
+}
+
+type InputProps = InputHTMLAttributes<HTMLInputElement> & CustomProps;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, children, ...rest }: InputProps, ref) => {
+  ({ error, className, children, ...rest }: InputProps, ref) => {
     const classNames = stringUtils.join([styles.input, className]);
 
-    if (children)
-      return (
-        <span className={classNames}>
-          <input {...rest} ref={ref} />
-          {children}
-        </span>
-      );
+    const InputElement = children ? (
+      <span className={classNames}>
+        <input {...rest} ref={ref} />
+        {children}
+      </span>
+    ) : (
+      <input className={classNames} {...rest} ref={ref} />
+    );
 
-    return <input className={classNames} {...rest} ref={ref} />;
+    return (
+      <>
+        {InputElement}
+        {error && <span>{error}</span>}
+      </>
+    );
   },
 );
 

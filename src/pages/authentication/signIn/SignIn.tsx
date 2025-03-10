@@ -44,13 +44,13 @@ export default function SignIn() {
         <Input
           type="email"
           placeholder="Email Address"
-          error={!!errors.email}
+          error={errors.email?.message}
           {...register('email')}
         />
         <Input
           type="password"
           placeholder="Password"
-          error={!!errors.password}
+          error={errors.password?.message}
           {...register('password')}
         />
 

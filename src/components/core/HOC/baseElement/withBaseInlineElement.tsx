@@ -33,6 +33,7 @@ function withBaseInlineElement<P extends ElementType, ExtraProps = {}>(
 
       const props = {
         ...rest,
+        error,
         className: composedClassName,
       } as React.ComponentPropsWithRef<P> & ExtraProps;
 

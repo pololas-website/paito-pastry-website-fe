@@ -5,7 +5,7 @@ import { stringUtils } from '../../utils';
 import { IStyles } from '../core/HOC/baseElement/baseElement.utils';
 
 interface CustomProps {
-  error?: string;
+  error?: string | boolean;
 }
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & CustomProps;
@@ -26,7 +26,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <>
         {InputElement}
-        {error && <span>{error}</span>}
+        {typeof error === 'string' && <span>{error}</span>}
       </>
     );
   },

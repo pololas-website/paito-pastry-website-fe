@@ -2,7 +2,7 @@ export interface IBasicClasses {
   small?: boolean;
   primary?: boolean;
   contrast?: boolean;
-  error?: string;
+  error?: string | boolean;
 }
 
 export interface IStyles {

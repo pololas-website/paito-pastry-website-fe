@@ -5,11 +5,11 @@ import {
   Input,
   InputGroup,
   Date as DateComponent,
-} from '../../components';
+} from '../../../components';
 
-import { signUpWithEmailAndPassword } from '../../firebase';
+import { signUpWithEmailAndPassword } from '../../../firebase';
 
-import styles from './authentication.module.css';
+import styles from '../authentication.module.css';
 
 export default function SignUp() {
   return (

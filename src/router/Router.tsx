@@ -5,7 +5,7 @@ import { Cakes, SignUp, SignIn, Users, AuthPage } from '../pages';
 
 import { loader as authLoader } from '../pages/authentication/AuthPage';
 
-import { action as signUpAction } from '../pages/authentication/SignUp';
+import { action as signUpAction } from '../pages/authentication/signUp/SignUp';
 import { action as signInAction } from '../pages/authentication/signIn/SignIn';
 
 const router = createBrowserRouter([

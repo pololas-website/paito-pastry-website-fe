@@ -1,7 +1,7 @@
 import { Link, redirect, useNavigate, useSubmit } from 'react-router-dom';
 import { Button, Divider, Input } from '../../../components';
 import { logInWithEmailAndPassword, signInWithGoogle } from '../../../firebase';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formSchema } from './schema';
 
@@ -22,36 +22,38 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
 
-  const onSubmit: SubmitHandler<IFormData> = (data) => {
-    const formData = new FormData();
-    formData.append('email', data.email);
-    formData.append('password', data.password);
-    submit(formData, { method: 'POST' });
-  };
-
   const handleOnSignInWithGoogle = async () => {
     await signInWithGoogle();
     navigate('/');
   };
 
-  // TODO: Implement errors user Interface in the forms and delete this console.log
-  console.log(errors);
+  const handleSignInSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+
+    handleSubmit(() => {
+      submit(formData, { method: 'POST' });
+    })(e);
+  };
+
+  const setEmptyStringAsUndefined = (value: string) => {
+    return value ? value : undefined;
+  };
 
   return (
     <section className={`container ${authStyles['auth-container']}`}>
-      <form className={authStyles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={authStyles.form} onSubmit={handleSignInSubmit}>
         <h4 className={`heading-4 ${authStyles.title}`}>Welcome back!</h4>
         <Input
           type="email"
           placeholder="Email Address"
           error={errors.email?.message}
-          {...register('email')}
+          {...register('email', { setValueAs: setEmptyStringAsUndefined })}
         />
         <Input
           type="password"
           placeholder="Password"
           error={errors.password?.message}
-          {...register('password')}
+          {...register('password', { setValueAs: setEmptyStringAsUndefined })}
         />
 
         <Button type="submit" className={styles['signin-button']}>

@@ -3,10 +3,11 @@ import { Button, Divider, Input } from '../../../components';
 import { logInWithEmailAndPassword, signInWithGoogle } from '../../../firebase';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { formSchema } from './schema';
+import { formSchema } from './signIn.schema';
 
 import authStyles from '../authentication.module.css';
 import styles from './signIn.module.css';
+import { zodRequiredOption } from '../../../components/core/utils/form.utils';
 
 interface IFormData {
   email: string;
@@ -35,10 +36,6 @@ export default function SignIn() {
     })(e);
   };
 
-  const setEmptyStringAsUndefined = (value: string) => {
-    return value ? value : undefined;
-  };
-
   return (
     <section className={`container ${authStyles['auth-container']}`}>
       <form className={authStyles.form} onSubmit={handleSignInSubmit}>
@@ -47,13 +44,13 @@ export default function SignIn() {
           type="email"
           placeholder="Email Address"
           error={errors.email?.message}
-          {...register('email', { setValueAs: setEmptyStringAsUndefined })}
+          {...register('email', zodRequiredOption)}
         />
         <Input
           type="password"
           placeholder="Password"
           error={errors.password?.message}
-          {...register('password', { setValueAs: setEmptyStringAsUndefined })}
+          {...register('password', zodRequiredOption)}
         />
 
         <Button type="submit" className={styles['signin-button']}>

@@ -1,5 +1,5 @@
-import { Form, redirect } from 'react-router-dom';
-
+import { redirect, useSubmit } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import {
   Button,
   Input,
@@ -7,48 +7,108 @@ import {
   Date as DateComponent,
   Select,
 } from '../../../components';
-
 import { signUpWithEmailAndPassword } from '../../../firebase';
+import { formSchema } from './signUp.schema';
 
 import styles from '../authentication.module.css';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { zodRequiredOption } from '../../../components/core/utils/form.utils';
+
+interface IFormData {
+  name: string;
+  lastName: string;
+  email: string;
+  passwordSection: {
+    password: string;
+    confirmPassword: string;
+  };
+  date: {
+    month: string;
+    day: number;
+    year: number;
+  };
+}
 
 export default function SignUp() {
+  const submit = useSubmit();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
+
+  const handleSignUpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+
+    handleSubmit(() => {
+      submit(formData, { method: 'POST' });
+    })(e);
+  };
+
   return (
     <section className={`container ${styles['auth-container']}`}>
-      <Form method="post" className={styles.form}>
+      <form className={styles.form} onSubmit={handleSignUpSubmit}>
         <h4 className={`heading-4 ${styles.title}`}>Create an Account</h4>
         <InputGroup>
-          <Input type="text" name="name" placeholder="First Name" />
-          <Input type="text" name="lastName" placeholder="Last Name" />
+          <Input
+            type="text"
+            placeholder="First Name"
+            error={!!errors.name?.message}
+            {...register('name', zodRequiredOption)}
+          />
+          <Input
+            type="text"
+            placeholder="Last Name"
+            error={!!errors.lastName?.message}
+            {...register('lastName', zodRequiredOption)}
+          />
         </InputGroup>
         <DateComponent>
-          {(monthProps, dayProps, yearProps) => (
+          {({ onChange, ...monthRestProps }, dayProps, yearProps) => (
             <InputGroup
               label="Birthday"
               descriptionHelp="Change the description!"
             >
-              <Select {...monthProps} />
-              <Select {...dayProps} />
-              <Select {...yearProps} />
+              <Select
+                error={!!errors.date?.message}
+                {...monthRestProps}
+                {...register('date.month', { onChange })}
+              />
+              <Select
+                error={!!errors.date?.message}
+                {...dayProps}
+                {...register('date.day', { valueAsNumber: true })}
+              />
+              <Select
+                error={!!errors.date?.message}
+                {...yearProps}
+                {...register('date.year', { valueAsNumber: true })}
+              />
             </InputGroup>
           )}
         </DateComponent>
-        <Input type="email" name="email" placeholder="Email Address" required />
         <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
+          type="email"
+          placeholder="Email Address"
+          error={!!errors.email?.message}
+          {...register('email', zodRequiredOption)}
         />
         <Input
           type="password"
-          name="confirmPassword"
+          placeholder="Password"
+          error={!!errors.passwordSection?.password?.message}
+          {...register('passwordSection.password', zodRequiredOption)}
+        />
+        <Input
+          type="password"
           placeholder="Confirm Passwrod"
+          error={!!errors.passwordSection?.confirmPassword?.message}
+          {...register('passwordSection.confirmPassword', zodRequiredOption)}
         />
         <Button type="submit" primary>
           Sign Up
         </Button>
-      </Form>
+      </form>
     </section>
   );
 }

@@ -1,18 +1,17 @@
-import { useRef } from 'react';
 import {
   getDayOptions,
   getYearOptions,
   MONTH_OPTIONS,
   getInitialDate,
   getMonthNumberOfDays,
+  useGetComponentsRefs,
+  DATE_IDS,
 } from './dateComponentUtils';
 
 interface IOptionProps<T extends number | string> {
   defaultValue: T;
   options: T[];
-  name: string;
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
-  ref?: React.MutableRefObject<HTMLSelectElement | null>;
 }
 
 export interface IDateProps {
@@ -25,9 +24,11 @@ export interface IDateProps {
 
 // TODO: Test this component with React testing library
 function Date({ children }: IDateProps) {
-  const daySelectRef = useRef<HTMLSelectElement | null>(null);
-  const monthSelectRef = useRef<HTMLSelectElement | null>(null);
-  const yearSelectRef = useRef<HTMLSelectElement | null>(null);
+  const [daySelectRef, monthSelectRef, yearSelectRef] = useGetComponentsRefs(
+    DATE_IDS.day,
+    DATE_IDS.month,
+    DATE_IDS.year,
+  );
   const { month, day, year } = getInitialDate();
   let days: number[] = [];
   const months = MONTH_OPTIONS;
@@ -56,23 +57,20 @@ function Date({ children }: IDateProps) {
   const monthProps = {
     defaultValue: month,
     options: months,
-    name: 'month',
     onChange: handleOnMonthChange,
-    ref: monthSelectRef,
+    id: DATE_IDS.month,
   };
 
   const dayProps = {
     defaultValue: day,
     options: days,
-    name: 'day',
-    ref: daySelectRef,
+    id: DATE_IDS.day,
   };
 
   const yearProps = {
     defaultValue: year,
     options: years,
-    name: 'year',
-    ref: yearSelectRef,
+    id: DATE_IDS.year,
   };
 
   return children(monthProps, dayProps, yearProps);

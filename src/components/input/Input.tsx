@@ -14,20 +14,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, className, children, ...rest }: InputProps, ref) => {
     const classNames = stringUtils.join([styles.input, className]);
 
-    const InputElement = children ? (
-      <span className={classNames}>
-        <input {...rest} ref={ref} />
-        {children}
-      </span>
-    ) : (
-      <input className={classNames} {...rest} ref={ref} />
-    );
-
     return (
-      <>
-        {InputElement}
+      <div>
+        <div className={classNames}>
+          <input {...rest} ref={ref} />
+          {children}
+        </div>
         {typeof error === 'string' && <span>{error}</span>}
-      </>
+      </div>
     );
   },
 );

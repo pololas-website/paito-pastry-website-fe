@@ -1,4 +1,4 @@
-import { Button, Tooltip } from './../../components';
+import { Tooltip } from './../../components';
 
 import styles from './inputGroup.module.css';
 
@@ -16,13 +16,10 @@ function InputGroup({ children, label, descriptionHelp }: IInputGroupProps) {
           <label>{label}</label>
           {descriptionHelp && (
             <Tooltip description={descriptionHelp}>
-              <Button
-                as={'a'}
+              <i
+                className={`${styles['help-icon']} fa-solid fa-circle-question fa-sm`}
                 title="Click for more information"
-                className={styles['help-icon']}
-              >
-                <i className="fa-solid fa-circle-question fa-sm"></i>
-              </Button>
+              ></i>
             </Tooltip>
           )}
         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { domUtils } from '../../../utils';
 
 const body = document.body;
@@ -27,15 +27,20 @@ export function useFadeAnimation(
     }
   }, [visible, elementRef, transition]);
 
-  const setFadeIn = (fade: boolean) => {
-    if (fade) {
-      setVisible(true);
-      return;
-    }
+  const setFadeIn = useCallback(
+    (fade: boolean) => {
+      if (fade) {
+        setVisible(true);
+        return;
+      }
 
-    elementRef.current!.style.opacity = '0';
-    setTimeout(() => setVisible(false), timeTransition);
-  };
+      if (elementRef.current) {
+        elementRef.current.style.opacity = '0';
+      }
+      setTimeout(() => setVisible(false), timeTransition);
+    },
+    [elementRef],
+  );
 
   return [visible, setFadeIn];
 }

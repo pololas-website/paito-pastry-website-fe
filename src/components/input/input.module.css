@@ -1,20 +1,22 @@
 .input {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  overflow: hidden;
+  min-width: 1rem;
+
   border-radius: var(--border-radius-m);
   border: 1px solid var(--color-gray-1);
-  padding: 1.8rem;
-  min-width: 1rem;
   color: var(--font-c-page);
   background-color: var(--color-gray-0);
 
   input {
+    padding: 1.8rem;
+    outline: none;
+    font-size: inherit;
+
     flex: 1;
     border: none;
-    outline: none;
-    overflow: hidden;
-    font-size: inherit;
     color: inherit;
     background-color: inherit;
 
@@ -25,20 +27,41 @@
     &::-webkit-search-cancel-button {
       margin-left: 0.5rem;
     }
+
+    &:has(+ .icon-error) {
+      padding-right: 5.2rem;
+    }
+  }
+
+  .icon-error {
+    position: absolute;
+    right: 1.8rem;
+    pointer-events: none;
+  }
+
+  button {
+    padding-right: 1.8rem;
   }
 }
 
 .small {
   font-size: 1.4rem;
   border-radius: var(--border-radius-s);
-  padding: 0.5rem 0.8rem;
+
+  input {
+    padding: 0.5rem 0.8rem;
+  }
 }
 
 .error {
-  border-color: var(--color-error);
+  border-color: var(--color-highlight);
+
+  & > i {
+    color: var(--color-highlight);
+  }
 
   & + span {
-    color: var(--color-error);
+    color: var(--color-highlight);
     font-size: var(--font-s--xs);
   }
 }

@@ -53,12 +53,14 @@ export default function SignUp() {
           <Input
             type="text"
             placeholder="First Name"
+            short
             error={!!errors.name?.message}
             {...register('name', zodRequiredOption)}
           />
           <Input
             type="text"
             placeholder="Last Name"
+            short
             error={!!errors.lastName?.message}
             {...register('lastName', zodRequiredOption)}
           />

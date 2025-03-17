@@ -1,4 +1,4 @@
-import styles from './input.module.css';
+import styles from './select.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 import { stringUtils } from './../../utils';
 import { forwardRef, SelectHTMLAttributes } from 'react';
@@ -12,12 +12,12 @@ type CustomProps = {
 type SelectProps = CustomProps &
   Omit<SelectHTMLAttributes<HTMLSelectElement>, keyof CustomProps>;
 
-// TODO: Analize the posibility to group all the common properties in another HOC
+// TODO: Analyse the posibility to group all the common properties in another HOC
 //        of common inputs like: select, input, dropdown(custom), textArea(maybe)
 //        Properties like: error(for default error message);
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, options = [], error, ...rest }, ref) => {
-    const classNames = stringUtils.join([styles.input, className]);
+    const classNames = stringUtils.join([styles.select, className]);
 
     return (
       <>

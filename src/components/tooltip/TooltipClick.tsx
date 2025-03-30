@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import styles from './tooltip.module.css';
 import { useFadeAnimation, useDisableScroll } from '../core/hooks/domHooks';
-import TooltipDescription from './TooltipDescription';
 import { ITooltipBaseProps } from './Tooltip';
 
 type TooltipClickProps = ITooltipBaseProps;
@@ -32,11 +31,18 @@ const TooltipClick: TooltipClick = ({
     <div className={styles.container} onClick={handleShowToolTip}>
       {children}
       {fadeIn && (
-        <TooltipDescription
-          description={description}
-          ref={tooltipContainerRef}
-          onClick={handleHideToolTip}
-        />
+        <>
+          <div
+            className={styles['background-layer']}
+            onClick={handleHideToolTip}
+          ></div>
+          <div
+            className={styles['tooltip-container']}
+            ref={tooltipContainerRef}
+          >
+            {description}
+          </div>
+        </>
       )}
     </div>
   );

@@ -56,7 +56,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <Tooltip
           as={TooltipBoolean}
           description={error}
-          visible={isFocus && !!error}
+          visible={errorMode === 'bubble' && isFocus && !!error}
         >
           <div className={classNames}>
             <input

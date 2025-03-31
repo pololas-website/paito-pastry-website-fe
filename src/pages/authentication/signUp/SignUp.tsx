@@ -55,6 +55,7 @@ export default function SignUp() {
             placeholder="First Name"
             short
             error={!!errors.name?.message}
+            errorMode="bubble"
             {...register('name', zodRequiredOption)}
           />
           <Input
@@ -62,6 +63,7 @@ export default function SignUp() {
             placeholder="Last Name"
             short
             error={!!errors.lastName?.message}
+            errorMode="bubble"
             {...register('lastName', zodRequiredOption)}
           />
         </InputGroup>
@@ -93,18 +95,21 @@ export default function SignUp() {
           type="email"
           placeholder="Email Address"
           error={!!errors.email?.message}
+          errorMode="bubble"
           {...register('email', zodRequiredOption)}
         />
         <Input
           type="password"
           placeholder="Password"
           error={!!errors.passwordSection?.password?.message}
+          errorMode="bubble"
           {...register('passwordSection.password', zodRequiredOption)}
         />
         <Input
           type="password"
           placeholder="Confirm Passwrod"
           error={!!errors.passwordSection?.confirmPassword?.message}
+          errorMode="bubble"
           {...register('passwordSection.confirmPassword', zodRequiredOption)}
         />
         <Button type="submit" primary>

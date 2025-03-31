@@ -51,30 +51,40 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       if (onBlur) onBlur(e);
     };
 
+    const inputElement = (
+      <div className={classNames}>
+        <input
+          ref={inputRef}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          size={short ? 1 : size}
+          {...rest}
+        />
+        {error && (
+          <i
+            className={`fa-solid fa-circle-exclamation ${styles['icon-error']}`}
+          ></i>
+        )}
+        {children}
+      </div>
+    );
+
     return (
       <div>
-        <Tooltip
-          as={TooltipBoolean}
-          description={error}
-          visible={errorMode === 'bubble' && isFocus && !!error}
-        >
-          <div className={classNames}>
-            <input
-              ref={inputRef}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              size={short ? 1 : size}
-              {...rest}
-            />
-            {error && (
-              <i
-                className={`fa-solid fa-circle-exclamation ${styles['icon-error']}`}
-              ></i>
-            )}
-            {children}
-          </div>
-        </Tooltip>
-        {error && errorMode === 'normal' && <span>{error}</span>}
+        {errorMode === 'bubble' ? (
+          <Tooltip
+            as={TooltipBoolean}
+            description={error}
+            visible={errorMode === 'bubble' && isFocus && !!error}
+          >
+            {inputElement}
+          </Tooltip>
+        ) : (
+          <>
+            {inputElement}
+            {error && errorMode === 'normal' && <span>{error}</span>}
+          </>
+        )}
       </div>
     );
   },

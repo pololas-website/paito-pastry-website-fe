@@ -54,7 +54,7 @@ export default function SignUp() {
             type="text"
             placeholder="First Name"
             short
-            error={!!errors.name?.message}
+            error={errors.name?.message}
             errorMode="bubble"
             {...register('name', zodRequiredOption)}
           />
@@ -62,7 +62,7 @@ export default function SignUp() {
             type="text"
             placeholder="Last Name"
             short
-            error={!!errors.lastName?.message}
+            error={errors.lastName?.message}
             errorMode="bubble"
             {...register('lastName', zodRequiredOption)}
           />
@@ -94,21 +94,21 @@ export default function SignUp() {
         <Input
           type="email"
           placeholder="Email Address"
-          error={!!errors.email?.message}
+          error={errors.email?.message}
           errorMode="bubble"
           {...register('email', zodRequiredOption)}
         />
         <Input
           type="password"
           placeholder="Password"
-          error={!!errors.passwordSection?.password?.message}
+          error={errors.passwordSection?.password?.message}
           errorMode="bubble"
           {...register('passwordSection.password', zodRequiredOption)}
         />
         <Input
           type="password"
           placeholder="Confirm Passwrod"
-          error={!!errors.passwordSection?.confirmPassword?.message}
+          error={errors.passwordSection?.confirmPassword?.message}
           errorMode="bubble"
           {...register('passwordSection.confirmPassword', zodRequiredOption)}
         />

@@ -65,3 +65,9 @@
     font-size: var(--font-s--xs);
   }
 }
+
+.input-container .bubble-error {
+  background-color: var(--color-highlight);
+  color: var(--color-white);
+  font-weight: var(--font-w--sb);
+}

@@ -12,6 +12,7 @@ const TooltipBoolean: TooltipBoolean = ({
   children,
   description,
   visible,
+  className,
 }: ITooltipBooleanProps) => {
   /*
   TODO:
@@ -37,12 +38,18 @@ const TooltipBoolean: TooltipBoolean = ({
   const tooltipContainerClasses = stringUtils.join([
     styles['tooltip-container'],
     styles.visible,
+    className,
   ]);
 
   return (
     <div className={styles.container}>
       {children}
-      {visible && <div className={tooltipContainerClasses}>{description}</div>}
+      {visible && (
+        <div className={tooltipContainerClasses}>
+          {description}
+          <div className={styles.arrow} />
+        </div>
+      )}
     </div>
   );
 };

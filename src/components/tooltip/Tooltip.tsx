@@ -3,6 +3,7 @@ import TooltipClick, { TooltipClick as TooltipClickType } from './TooltipClick';
 export interface ITooltipBaseProps {
   children: React.ReactNode;
   description: string | React.ReactNode;
+  className?: string;
 }
 
 interface PolymorphicTooltip<T extends TooltipBoolean | TooltipClickType> {

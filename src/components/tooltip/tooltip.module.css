@@ -7,7 +7,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: calc(100% + 3rem);
+  right: calc(100% + 1rem);
   z-index: var(--zindex-menu);
   padding: 1rem;
   width: 20rem;
@@ -19,6 +19,16 @@
   cursor: initial;
   font-size: var(--font-s--s);
   opacity: 0;
+
+  .arrow {
+    background-color: inherit;
+    height: 1rem;
+    width: 1rem;
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
 
   &.visible {
     opacity: 1;

@@ -45,6 +45,13 @@ export default function SignUp() {
     })(e);
   };
 
+  const birthdayDescription = (
+    <>
+      <strong>Providing your birthday</strong> helps make sure you get the right
+      experience for your age like getting great offers and discounts.
+    </>
+  );
+
   return (
     <section className={`container ${styles['auth-container']}`}>
       <form className={styles.form} onSubmit={handleSignUpSubmit}>
@@ -71,7 +78,8 @@ export default function SignUp() {
           {({ onChange, ...monthRestProps }, dayProps, yearProps) => (
             <InputGroup
               label="Birthday"
-              descriptionHelp="Change the description!"
+              descriptionHelp={birthdayDescription}
+              error={errors.date?.message}
             >
               <Select
                 error={!!errors.date?.message}

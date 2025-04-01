@@ -4,6 +4,7 @@ import { stringUtils } from '../../utils';
 
 interface ITooltipBooleanProps extends ITooltipBaseProps {
   visible: boolean;
+  error?: boolean;
 }
 
 export type TooltipBoolean = (props: ITooltipBooleanProps) => JSX.Element;
@@ -13,6 +14,7 @@ const TooltipBoolean: TooltipBoolean = ({
   description,
   visible,
   className,
+  error,
 }: ITooltipBooleanProps) => {
   /*
   TODO:
@@ -38,6 +40,7 @@ const TooltipBoolean: TooltipBoolean = ({
   const tooltipContainerClasses = stringUtils.join([
     styles['tooltip-container'],
     styles.visible,
+    error ? styles.error : '',
     className,
   ]);
 

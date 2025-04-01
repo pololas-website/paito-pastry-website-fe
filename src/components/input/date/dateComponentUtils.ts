@@ -47,7 +47,9 @@ export function getMonthNumberOfDays(monthName: string, year: number) {
   return dateUtils.getMonthNumberOfDays(monthNumber, year);
 }
 
-// TODO: make a stronger id with uuid.
+// TODO:
+// make a stronger id with uuid.
+// this also will prevent a bug when using more than one Date component in the same form.
 export const DATE_IDS = {
   month: 'dateComponent-monthId',
   day: 'dateComponent-dayId',

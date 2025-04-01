@@ -70,13 +70,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
 
     return (
-      <div className={styles['input-container']}>
+      <div>
         {errorMode === 'bubble' ? (
           <Tooltip
             as={TooltipBoolean}
             description={error}
             visible={errorMode === 'bubble' && isFocus && !!error}
-            className={styles['bubble-error']}
+            error
           >
             {inputElement}
           </Tooltip>

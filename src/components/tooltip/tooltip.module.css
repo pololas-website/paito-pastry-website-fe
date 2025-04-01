@@ -20,19 +20,25 @@
   font-size: var(--font-s--s);
   opacity: 0;
 
-  .arrow {
-    background-color: inherit;
-    height: 1rem;
-    width: 1rem;
-    position: absolute;
-    right: -0.5rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-  }
-
   &.visible {
     opacity: 1;
   }
+}
+
+.error {
+  background-color: var(--color-highlight);
+  color: var(--color-white);
+  font-weight: var(--font-w--sb);
+}
+
+.arrow {
+  background-color: inherit;
+  height: 1rem;
+  width: 1rem;
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .background-layer {

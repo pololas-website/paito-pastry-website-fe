@@ -23,7 +23,7 @@ import { hasPassedMoreThanNumberOfYears } from '../../../utils/dateUtils';
 export const formSchema = z.object({
   name: z.string({ required_error: REQUIRED_NAME_MESSAGE }),
   lastName: z.string({ required_error: REQUIRED_LAST_NAME_MESSAGE }),
-  email: z.string({ required_error: REQUIRED_EMAIL_MESSAGE }),
+  email: z.string({ required_error: REQUIRED_EMAIL_MESSAGE }).email(),
   passwordSection: z
     .object({
       password: z

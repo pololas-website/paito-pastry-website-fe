@@ -13,8 +13,9 @@ import { formSchema } from './signUp.schema';
 import styles from '../authentication.module.css';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { zodRequiredOption } from '../../../components/core/utils/form.utils';
+import { useWatchDateComponent, useWatchPasswordSection } from './signUp.hooks';
 
-interface IFormData {
+export interface IFormData {
   name: string;
   lastName: string;
   email: string;
@@ -35,8 +36,12 @@ export default function SignUp() {
     register,
     handleSubmit,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
+
+  useWatchPasswordSection(watch, trigger);
+  useWatchDateComponent(watch, trigger);
 
   const handleSignUpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
@@ -52,23 +57,6 @@ export default function SignUp() {
       experience for your age like getting great offers and discounts.
     </>
   );
-
-  /*
-  TODO:
-  Currently this function should be unnecessary but there's a bug in react-hook-form resolver that when
-  evaluated an object in the schema it doesn't update the errors object so that no matter if the inputs
-  are correct the validation is not updated, So that here the validation is manually trigered.
-  For more info see:
-  https://github.com/react-hook-form/react-hook-form/issues/12080
-  https://github.com/orgs/react-hook-form/discussions/12188
-
-  The task is check periodically if the bug is solved in order to delete this logic.
-  */
-  const handleBirthDateChange = () => {
-    if (Object.keys(errors).length > 0) {
-      trigger('date');
-    }
-  };
 
   return (
     <section className={`container ${styles['auth-container']}`}>
@@ -102,19 +90,13 @@ export default function SignUp() {
               <Select
                 error={!!errors.date?.message}
                 {...monthRestProps}
-                {...register('date.month', {
-                  onChange: (e) => {
-                    if (onChange) onChange(e);
-                    handleBirthDateChange();
-                  },
-                })}
+                {...register('date.month', { onChange })}
               />
               <Select
                 error={!!errors.date?.message}
                 {...dayProps}
                 {...register('date.day', {
                   valueAsNumber: true,
-                  onChange: handleBirthDateChange,
                 })}
               />
               <Select
@@ -122,7 +104,6 @@ export default function SignUp() {
                 {...yearProps}
                 {...register('date.year', {
                   valueAsNumber: true,
-                  onChange: handleBirthDateChange,
                 })}
               />
             </InputGroup>
@@ -145,11 +126,14 @@ export default function SignUp() {
         <Input
           type="password"
           placeholder="Confirm Passwrod"
-          error={errors.passwordSection?.confirmPassword?.message}
+          error={
+            errors.passwordSection?.confirmPassword?.message ??
+            errors.passwordSection?.message
+          }
           errorMode="bubble"
           {...register('passwordSection.confirmPassword', zodRequiredOption)}
         />
-        <Button type="submit" primary>
+        <Button type="submit" primary formNoValidate>
           Sign Up
         </Button>
       </form>

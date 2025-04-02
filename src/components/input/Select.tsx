@@ -1,35 +1,40 @@
-import styles from './input.module.css';
+import styles from './select.module.css';
 import withBaseInlineElement from '../core/HOC/baseElement/withBaseInlineElement';
 import { stringUtils } from './../../utils';
-import { SelectHTMLAttributes } from 'react';
-
-export interface IChangedOption {
-  name: string;
-  value: string;
-}
+import { forwardRef, SelectHTMLAttributes } from 'react';
+import { IStyles } from '../core/HOC/baseElement/baseElement.utils';
 
 type CustomProps = {
   options?: string[] | number[];
-  onChange: ({ name, value }: IChangedOption) => void;
+  error?: string | boolean;
 };
 
 type SelectProps = CustomProps &
   Omit<SelectHTMLAttributes<HTMLSelectElement>, keyof CustomProps>;
 
-function Select({ className, options = [], onChange, ...rest }: SelectProps) {
-  const classNames = stringUtils.join([styles.input, className]);
+// TODO: Analyse the posibility to group all the common properties in another HOC
+//        of common inputs like: select, input, dropdown(custom), textArea(maybe)
+//        Properties like: error(for default error message);
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  ({ className, options = [], error, ...rest }, ref) => {
+    const classNames = stringUtils.join([styles.select, className]);
 
-  return (
-    <select
-      className={classNames}
-      onChange={(e) => onChange({ name: e.target.name, value: e.target.value })}
-      {...rest}
-    >
-      {options.map((option) => (
-        <option key={option} label={option.toString()} value={option} />
-      ))}
-    </select>
-  );
-}
+    return (
+      <>
+        <select className={classNames} ref={ref} {...rest}>
+          {options.map((option) => (
+            <option key={option} label={option.toString()} value={option} />
+          ))}
+        </select>
+        {typeof error === 'string' && <span>{error}</span>}
+      </>
+    );
+  },
+);
 
-export default withBaseInlineElement(Select, styles);
+export default withBaseInlineElement<'select', SelectProps>(
+  Select as React.ForwardRefExoticComponent<
+    React.ComponentPropsWithRef<'select'> & SelectProps
+  >,
+  styles as unknown as IStyles,
+);

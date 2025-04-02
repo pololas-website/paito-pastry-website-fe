@@ -1,57 +1,79 @@
-import { useMemo, useState } from 'react';
-import { InputGroup, Select } from '../../../components';
-import * as dateUtils from './dateComponentUtils';
-import { IChangedOption } from '../Select';
+import {
+  getDayOptions,
+  getYearOptions,
+  MONTH_OPTIONS,
+  getInitialDate,
+  getMonthNumberOfDays,
+  useGetComponentsRefs,
+  DATE_IDS,
+} from './dateComponentUtils';
 
-interface IDateProps {
-  label?: string;
-  descriptionHelp?: string | React.ReactNode;
+interface IOptionProps<T extends number | string> {
+  defaultValue: T;
+  options: T[];
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
-function Date({ label, descriptionHelp }: IDateProps) {
-  const now = dateUtils.getInitialDate();
-  const [{ month, day, year }, setDate] = useState(now);
-  const months = dateUtils.MONTH_OPTIONS;
-  const days = useMemo(
-    () => dateUtils.getDayOptions(month, year),
-    [month, year],
-  );
-  const years = useMemo(() => dateUtils.getYearOptions(now.year), [now.year]);
+export interface IDateProps {
+  children: (
+    monthProps: IOptionProps<string>,
+    dayProps: IOptionProps<number>,
+    yearProps: IOptionProps<number>,
+  ) => React.ReactElement;
+}
 
-  function handleSetDate({ name, value }: IChangedOption) {
-    setDate((date) => ({
-      ...date,
-      [name]: name === 'month' ? value : +value,
-    }));
+// TODO: Test this component with React testing library
+function Date({ children }: IDateProps) {
+  const [daySelectRef, monthSelectRef, yearSelectRef] = useGetComponentsRefs(
+    DATE_IDS.day,
+    DATE_IDS.month,
+    DATE_IDS.year,
+  );
+  const { month, day, year } = getInitialDate();
+  let days: number[] = [];
+  const months = MONTH_OPTIONS;
+  const years = getYearOptions(year);
+  setDayOptions();
+
+  function setDayOptions() {
+    days = getDayOptions(
+      monthSelectRef.current?.value ?? month,
+      Number(yearSelectRef.current?.value ?? year),
+    );
   }
 
-  function handleOnMonthChange(updatedData: IChangedOption) {
-    const monthDays = dateUtils.getMonthNumberOfDays(month, year);
+  function handleOnMonthChange() {
+    const monthDays = getMonthNumberOfDays(
+      monthSelectRef.current?.value ?? month,
+      Number(yearSelectRef.current?.value ?? year),
+    );
+    const day = Number(daySelectRef.current!.value);
 
-    if (day > monthDays) {
-      handleSetDate({ name: 'day', value: monthDays.toString() });
-    }
+    if (day > monthDays) daySelectRef.current!.value = monthDays.toString();
 
-    handleSetDate(updatedData);
+    setDayOptions();
   }
 
-  return (
-    <InputGroup label={label} descriptionHelp={descriptionHelp}>
-      <Select
-        options={months}
-        value={month}
-        name="month"
-        onChange={handleOnMonthChange}
-      />
-      <Select options={days} value={day} name="day" onChange={handleSetDate} />
-      <Select
-        options={years}
-        value={year}
-        name="year"
-        onChange={handleSetDate}
-      />
-    </InputGroup>
-  );
+  const monthProps = {
+    defaultValue: month,
+    options: months,
+    onChange: handleOnMonthChange,
+    id: DATE_IDS.month,
+  };
+
+  const dayProps = {
+    defaultValue: day,
+    options: days,
+    id: DATE_IDS.day,
+  };
+
+  const yearProps = {
+    defaultValue: year,
+    options: years,
+    id: DATE_IDS.year,
+  };
+
+  return children(monthProps, dayProps, yearProps);
 }
 
 export default Date;

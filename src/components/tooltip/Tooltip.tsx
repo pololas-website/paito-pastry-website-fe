@@ -1,42 +1,33 @@
-import { useRef } from 'react';
-import styles from './tooltip.module.css';
-import { useFadeAnimation, useDisableScroll } from '../core/hooks/domHooks';
-
-interface ITooltipProps {
+import { TooltipBoolean } from './TooltipBoolean';
+import TooltipClick, { TooltipClick as TooltipClickType } from './TooltipClick';
+export interface ITooltipBaseProps {
   children: React.ReactNode;
   description: string | React.ReactNode;
+  className?: string;
 }
 
-function Tooltip({ children, description }: ITooltipProps) {
-  const tooltipContainderRef = useRef(null);
-  const [fadeIn, setFadeIn] = useFadeAnimation(tooltipContainderRef);
+interface PolymorphicTooltip<T extends TooltipBoolean | TooltipClickType> {
+  as?: T;
+}
 
-  useDisableScroll(fadeIn);
+type TooltipProps<T extends TooltipBoolean | TooltipClickType> =
+  PolymorphicTooltip<T> & React.ComponentPropsWithoutRef<T>;
 
-  function handleHideToolTip(e: React.MouseEvent) {
-    e.stopPropagation();
-    setFadeIn(false);
-  }
+function Tooltip<
+  T extends TooltipBoolean | TooltipClickType = TooltipClickType,
+>({ as, ...rest }: TooltipProps<T>) {
+  /* 
+  Todo:
+  Currently it doesn't have much sense to make this assertion but without it
+  the typing will get an error. Investigate why this is happening, currently
+  it doesn't happen when using a polymorphic component:
+  https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/
+  */
+  const Component = (as ?? TooltipClick) as unknown as React.FunctionComponent<
+    Omit<TooltipProps<T>, 'as'>
+  >;
 
-  return (
-    <div className={styles.container} onClick={() => setFadeIn(true)}>
-      {children}
-      {fadeIn && (
-        <>
-          <div
-            className={styles['background-layer']}
-            onClick={(e) => handleHideToolTip(e)}
-          ></div>
-          <div
-            className={styles['tooltip-container']}
-            ref={tooltipContainderRef}
-          >
-            {description}
-          </div>
-        </>
-      )}
-    </div>
-  );
+  return <Component {...rest} />;
 }
 
 export default Tooltip;

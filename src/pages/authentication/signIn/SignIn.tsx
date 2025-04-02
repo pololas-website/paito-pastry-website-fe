@@ -1,29 +1,58 @@
-import { Form, Link, redirect, useNavigate } from 'react-router-dom';
-import { Button, Divider, Input } from '../../components';
-import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
+import { Link, redirect, useNavigate, useSubmit } from 'react-router-dom';
+import { Button, Divider, Input } from '../../../components';
+import { logInWithEmailAndPassword, signInWithGoogle } from '../../../firebase';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { formSchema } from './signIn.schema';
 
-import authStyles from './authentication.module.css';
+import authStyles from '../authentication.module.css';
 import styles from './signIn.module.css';
+import { zodRequiredOption } from '../../../components/core/utils/form.utils';
+
+interface IFormData {
+  email: string;
+  password: string;
+}
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const submit = useSubmit();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
 
   const handleOnSignInWithGoogle = async () => {
     await signInWithGoogle();
     navigate('/');
   };
 
+  const handleSignInSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+
+    handleSubmit(() => {
+      submit(formData, { method: 'POST' });
+    })(e);
+  };
+
   return (
     <section className={`container ${authStyles['auth-container']}`}>
-      <Form method="post" className={authStyles.form}>
+      <form className={authStyles.form} onSubmit={handleSignInSubmit}>
         <h4 className={`heading-4 ${authStyles.title}`}>Welcome back!</h4>
-        <Input type="email" name="email" placeholder="Email Address" required />
+        <Input
+          type="email"
+          placeholder="Email Address"
+          error={errors.email?.message}
+          {...register('email', zodRequiredOption)}
+        />
         <Input
           type="password"
-          name="password"
           placeholder="Password"
-          required
+          error={errors.password?.message}
+          {...register('password', zodRequiredOption)}
         />
+
         <Button type="submit" className={styles['signin-button']}>
           Sign In
         </Button>
@@ -58,7 +87,7 @@ export default function SignIn() {
             </Button>
           </div>
         </div>
-      </Form>
+      </form>
     </section>
   );
 }

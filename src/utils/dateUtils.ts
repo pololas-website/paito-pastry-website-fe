@@ -7,8 +7,8 @@ export function getDayMothYear(date: Date) {
 }
 
 export function hasPassedMoreThanNumberOfYears(years: number, date: Date) {
-  const [currentDay, currentMonth, currentYear] = getDayMothYear(date);
-  const [givenDay, givenMonth, givenYear] = getDayMothYear(new Date());
+  const [currentDay, currentMonth, currentYear] = getDayMothYear(new Date());
+  const [givenDay, givenMonth, givenYear] = getDayMothYear(date);
 
   if (currentYear - givenYear < years) {
     return false;

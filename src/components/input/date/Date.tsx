@@ -32,7 +32,7 @@ function Date({ children }: IDateProps) {
   const { month, day, year } = getInitialDate();
   let days: number[] = [];
   const months = MONTH_OPTIONS;
-  const years = getYearOptions(Number(yearSelectRef.current?.value ?? year));
+  const years = getYearOptions(year);
   setDayOptions();
 
   function setDayOptions() {

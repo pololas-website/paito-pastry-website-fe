@@ -19,15 +19,12 @@ function InputGroup({
 }: IInputGroupProps) {
   const [visibleError, setVisibleError] = useState(false);
 
-  const showBubbleError = () => setVisibleError(true);
-  const hideBubbleError = () => setVisibleError(false);
-
   const fields = (
     <div
       className={styles.grid}
       tabIndex={error ? 0 : undefined}
-      onFocus={showBubbleError}
-      onBlur={hideBubbleError}
+      onFocus={() => setVisibleError(true)}
+      onBlur={() => setVisibleError(false)}
     >
       {children}
     </div>
@@ -48,18 +45,14 @@ function InputGroup({
           )}
         </div>
       )}
-      {error ? (
-        <Tooltip
-          as={TooltipBoolean}
-          description={error}
-          visible={!!error && visibleError}
-          error
-        >
-          {fields}
-        </Tooltip>
-      ) : (
-        fields
-      )}
+      <Tooltip
+        as={TooltipBoolean}
+        description={error}
+        visible={!!error && !!visibleError}
+        error
+      >
+        {fields}
+      </Tooltip>
     </div>
   );
 }

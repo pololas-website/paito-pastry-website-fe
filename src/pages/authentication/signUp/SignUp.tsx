@@ -34,6 +34,7 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
 
@@ -51,6 +52,23 @@ export default function SignUp() {
       experience for your age like getting great offers and discounts.
     </>
   );
+
+  /*
+  TODO:
+  Currently this function should be unnecessary but there's a bug in react-hook-form resolver that when
+  evaluated an object in the schema it doesn't update the errors object so that no matter if the inputs
+  are correct the validation is not updated, So that here the validation is manually trigered.
+  For more info see:
+  https://github.com/react-hook-form/react-hook-form/issues/12080
+  https://github.com/orgs/react-hook-form/discussions/12188
+
+  The task is check periodically if the bug is solved in order to delete this logic.
+  */
+  const handleBirthDateChange = () => {
+    if (Object.keys(errors).length > 0) {
+      trigger('date');
+    }
+  };
 
   return (
     <section className={`container ${styles['auth-container']}`}>
@@ -84,17 +102,28 @@ export default function SignUp() {
               <Select
                 error={!!errors.date?.message}
                 {...monthRestProps}
-                {...register('date.month', { onChange })}
+                {...register('date.month', {
+                  onChange: (e) => {
+                    if (onChange) onChange(e);
+                    handleBirthDateChange();
+                  },
+                })}
               />
               <Select
                 error={!!errors.date?.message}
                 {...dayProps}
-                {...register('date.day', { valueAsNumber: true })}
+                {...register('date.day', {
+                  valueAsNumber: true,
+                  onChange: handleBirthDateChange,
+                })}
               />
               <Select
                 error={!!errors.date?.message}
                 {...yearProps}
-                {...register('date.year', { valueAsNumber: true })}
+                {...register('date.year', {
+                  valueAsNumber: true,
+                  onChange: handleBirthDateChange,
+                })}
               />
             </InputGroup>
           )}

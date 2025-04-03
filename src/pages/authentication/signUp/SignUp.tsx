@@ -14,6 +14,7 @@ import styles from '../authentication.module.css';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { zodRequiredOption } from '../../../components/core/utils/form.utils';
 import { useWatchDateComponent, useWatchPasswordSection } from './signUp.hooks';
+import { useRef } from 'react';
 
 export interface IFormData {
   name: string;
@@ -39,12 +40,18 @@ export default function SignUp() {
     watch,
     formState: { errors },
   } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
+  const hasBeenSubmitted = useRef(false);
+  const previousErrors = useRef(errors);
 
-  useWatchPasswordSection(watch, trigger);
-  useWatchDateComponent(watch, trigger);
+  console.log(previousErrors.current === errors);
+  previousErrors.current = errors;
+
+  useWatchPasswordSection(watch, trigger, hasBeenSubmitted.current, errors);
+  useWatchDateComponent(watch, trigger, hasBeenSubmitted.current);
 
   const handleSignUpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
+    hasBeenSubmitted.current = true;
 
     handleSubmit(() => {
       submit(formData, { method: 'POST' });
@@ -57,6 +64,8 @@ export default function SignUp() {
       experience for your age like getting great offers and discounts.
     </>
   );
+
+  console.log(errors);
 
   return (
     <section className={`container ${styles['auth-container']}`}>

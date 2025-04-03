@@ -39,7 +39,6 @@ export function throttleEndWithCancel(
   function throttled(...args: unknown[]) {
     if (!timeout) {
       timeout = setTimeout(() => {
-        console.log('was executed');
         fn(args);
         timeout = undefined;
       }, delay);

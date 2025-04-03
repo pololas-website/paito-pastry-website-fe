@@ -41,10 +41,6 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<IFormData>({ resolver: zodResolver(formSchema) });
   const hasBeenSubmitted = useRef(false);
-  const previousErrors = useRef(errors);
-
-  console.log(previousErrors.current === errors);
-  previousErrors.current = errors;
 
   useWatchPasswordSection(watch, trigger, hasBeenSubmitted.current, errors);
   useWatchDateComponent(watch, trigger, hasBeenSubmitted.current);
@@ -64,8 +60,6 @@ export default function SignUp() {
       experience for your age like getting great offers and discounts.
     </>
   );
-
-  console.log(errors);
 
   return (
     <section className={`container ${styles['auth-container']}`}>

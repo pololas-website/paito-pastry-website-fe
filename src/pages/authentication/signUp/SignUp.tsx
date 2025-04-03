@@ -143,9 +143,9 @@ export default function SignUp() {
 
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
-  const day = formData.get('day');
-  const month = formData.get('month');
-  const year = formData.get('year');
+  const day = formData.get('date.day');
+  const month = formData.get('date.month');
+  const year = formData.get('date.year');
   const birthday = new Date(`${year} ${month} ${day}`).toLocaleDateString();
 
   await signUpWithEmailAndPassword(
@@ -153,7 +153,7 @@ export async function action({ request }: { request: Request }) {
     formData.get('lastName') as string,
     formData.get('email') as string,
     birthday,
-    formData.get('password') as string,
+    formData.get('passwordSection.password') as string,
   );
 
   return redirect('/users');

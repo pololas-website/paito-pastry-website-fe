@@ -2,7 +2,7 @@ import { redirect, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {
   Button,
-  Input,
+  ErrorBubbleInput as Input,
   InputGroup,
   Date as DateComponent,
   Select,

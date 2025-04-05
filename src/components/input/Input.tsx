@@ -18,9 +18,9 @@ interface CustomProps {
   errorMode?: 'normal' | 'bubble';
 }
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & CustomProps;
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & CustomProps;
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       short,

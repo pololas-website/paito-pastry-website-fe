@@ -13,7 +13,7 @@ export interface IStyles {
  * Take boolean properties as an object and Map them to a css basic element classes.
  * (i.e. small, primary, contrast)
  *
- * @param  {object} classNames boolean | undefined classNames
+ * @param  {object} classNames boolean | string | undefined classNames
  * @returns an array of basic-element classes
  */
 export function getBasicElementClasses(classNames: IBasicClasses) {

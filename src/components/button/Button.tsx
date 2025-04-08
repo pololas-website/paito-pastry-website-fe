@@ -1,12 +1,12 @@
 import styles from './button.module.css';
 import { polymorphicForwardRef } from '../core/types';
 import {
-  IBasicClasses,
+  IBaseElementProperties,
   IStyles,
   getComposedClassName,
 } from '../core/HOC/baseElement/baseElement.utils';
 import { stringUtils } from '../../utils';
-interface IButtonProps extends IBasicClasses {
+interface IButtonProps extends IBaseElementProperties {
   icon?: boolean;
   rounded?: boolean;
   className?: string;

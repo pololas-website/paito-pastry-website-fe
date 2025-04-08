@@ -4,11 +4,11 @@ import { ElementType } from 'react';
 import {
   getComposedClassName,
   IStyles,
-  IBasicClasses,
+  IBaseElementProperties,
 } from './baseElement.utils';
 import { polymorphicForwardRef } from '../../types';
 
-interface IWithBaseInlineElementProps extends IBasicClasses {
+interface IWithBaseInlineElementProps extends IBaseElementProperties {
   className?: string;
 }
 

@@ -1,4 +1,9 @@
-import { getBasicElementClasses } from './baseElement.utils';
+import {
+  getBasicElementClasses,
+  getComposedClassName,
+  IBaseElementProperties,
+  IStyles,
+} from './baseElement.utils';
 
 describe('base Element utils', () => {
   describe('Testing the "getBasicElementClasses" function:', () => {
@@ -55,6 +60,75 @@ describe('base Element utils', () => {
         contrast,
         error,
       });
+
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('Testing the "composeAllClasses" function:', () => {
+    const initialModuleStyles: IStyles = {
+      small: 'small-class',
+      primary: 'primary-class',
+      contrast: 'contrast-class',
+      error: 'error-class',
+    };
+    let moduleStyles: IStyles = { ...initialModuleStyles };
+    const initialProperties: IBaseElementProperties = {
+      small: true,
+      primary: true,
+      contrast: true,
+      error: 'error message',
+    };
+    let properties: IBaseElementProperties = { ...initialProperties };
+
+    beforeEach(() => {
+      moduleStyles = { ...initialModuleStyles };
+      properties = { ...initialProperties };
+    });
+
+    it('should return all the provided classes', () => {
+      const extraClass = 'extra-class-name';
+      const expected = [
+        'small-class',
+        'primary-class',
+        'contrast-class',
+        'error-class',
+        'extra-class-name',
+      ].join(' ');
+
+      const result = getComposedClassName(properties, moduleStyles, extraClass);
+
+      expect(result).toEqual(expected);
+    });
+
+    it('should return an empty string className when provided an object Properties with all its values set to undefined.', () => {
+      properties = {};
+      const extraClass = undefined;
+      const expected = '';
+
+      const result = getComposedClassName(properties, moduleStyles, extraClass);
+
+      expect(result).toEqual(expected);
+    });
+
+    it('should not return an error className with an empty string set to the error property.', () => {
+      properties.error = '';
+      const extraClass = undefined;
+      const expected = ['small-class', 'primary-class', 'contrast-class'].join(
+        ' ',
+      );
+
+      const result = getComposedClassName(properties, moduleStyles, extraClass);
+
+      expect(result).toEqual(expected);
+    });
+
+    it('should return an error className with the error property set to true.', () => {
+      properties = { error: true };
+      const extraClass = undefined;
+      const expected = 'error-class';
+
+      const result = getComposedClassName(properties, moduleStyles, extraClass);
 
       expect(result).toEqual(expected);
     });

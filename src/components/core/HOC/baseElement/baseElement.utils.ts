@@ -1,4 +1,4 @@
-export interface IBasicClasses {
+export interface IBaseElementProperties {
   small?: boolean;
   primary?: boolean;
   contrast?: boolean;
@@ -16,13 +16,22 @@ export interface IStyles {
  * @param  {object} classNames boolean | string | undefined classNames
  * @returns an array of basic-element classes
  */
-export function getBasicElementClasses(classNames: IBasicClasses) {
-  return Object.keys(classNames).filter(
-    (className) => classNames[className as keyof IBasicClasses],
+export function getBasicElementClasses(baseProperties: IBaseElementProperties) {
+  return Object.keys(baseProperties).filter(
+    (property) => baseProperties[property as keyof IBaseElementProperties],
   );
 }
 
-export function composeAllClasses(
+/**
+ * Get all the existent valid classNames in {@link moduleStyles} given by the
+ * {@link basicElementClasses} classNames array and return a valid and applicable array of
+ * classNames with the provided {@link extraClass}.
+ * @param moduleStyles
+ * @param basicElementClasses
+ * @param extraClass
+ * @returns an Array of existent valid classNames.
+ */
+function composeAllClasses(
   moduleStyles: IStyles,
   basicElementClasses: string[],
   extraClass?: string,
@@ -36,10 +45,10 @@ export function composeAllClasses(
 }
 
 export function getComposedClassName(
-  classNames: IBasicClasses,
+  baseProperties: IBaseElementProperties,
   moduleStyles: IStyles,
   extraClass?: string,
 ) {
-  const basicElementClasses = getBasicElementClasses(classNames);
+  const basicElementClasses = getBasicElementClasses(baseProperties);
   return composeAllClasses(moduleStyles, basicElementClasses, extraClass);
 }

@@ -10,7 +10,7 @@ export interface IStyles {
 }
 
 /**
- * Take boolean properties as an object and Map them to a css basic element classes.
+ * Take boolean/string properties as an object and Map them to a css basic element classes, where each property name maps to a css className.
  * (i.e. small, primary, contrast)
  *
  * @param  {object} classNames boolean | string | undefined classNames

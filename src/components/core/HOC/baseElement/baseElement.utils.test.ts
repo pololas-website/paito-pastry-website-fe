@@ -1,40 +1,34 @@
 import { getBasicElementClasses } from './baseElement.utils';
 
 describe('base Element utils', () => {
-  describe('Get basic-element class names', () => {
-    test('no boolean classes passed', () => {
-      const [small, primary, contrast] = [undefined, undefined, undefined];
+  describe('Testing the "getBasicElementClasses" function:', () => {
+    test('should return an empty string when only falsy values are provided', () => {
+      const [small, primary, contrast] = [undefined, undefined, undefined, ''];
       const expected: string[] = [];
+      const result = getBasicElementClasses({ small, primary, contrast });
 
-      expect(getBasicElementClasses({ small, primary, contrast })).toEqual(
-        expected,
-      );
+      expect(result).toEqual(expected);
     });
 
-    test('provide only some classes', () => {
+    it('should return only the truthy values as classes', () => {
       const [small, primary, contrast, error] = [
-        true,
+        undefined,
         undefined,
         true,
-        undefined,
+        '',
       ];
-      const expected = ['small', 'contrast'];
-
-      expect(
-        getBasicElementClasses({ small, primary, contrast, error }),
-      ).toEqual(expected);
-    });
-
-    test('provide only the last className', () => {
-      const [small, primary, contrast] = [undefined, undefined, true];
       const expected = ['contrast'];
+      const result = getBasicElementClasses({
+        small,
+        primary,
+        contrast,
+        error,
+      });
 
-      expect(getBasicElementClasses({ small, primary, contrast })).toEqual(
-        expected,
-      );
+      expect(result).toEqual(expected);
     });
 
-    test('provide a string value not boolean one', () => {
+    it('should return a valid class if a property string was provided', () => {
       const [small, primary, contrast, error] = [
         true,
         undefined,
@@ -42,19 +36,27 @@ describe('base Element utils', () => {
         'error',
       ];
       const expected = ['small', 'contrast', 'error'];
+      const result = getBasicElementClasses({
+        small,
+        primary,
+        contrast,
+        error,
+      });
 
-      expect(
-        getBasicElementClasses({ small, primary, contrast, error }),
-      ).toEqual(expected);
+      expect(result).toEqual(expected);
     });
 
-    test('provide a string value not boolean one but empty', () => {
+    it('should not take on account empty strings', () => {
       const [small, primary, contrast, error] = [true, undefined, true, ''];
       const expected = ['small', 'contrast'];
+      const result = getBasicElementClasses({
+        small,
+        primary,
+        contrast,
+        error,
+      });
 
-      expect(
-        getBasicElementClasses({ small, primary, contrast, error }),
-      ).toEqual(expected);
+      expect(result).toEqual(expected);
     });
   });
 });
